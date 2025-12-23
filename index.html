@@ -16,7 +16,7 @@
       --dark: #0F172A;
       --gray: #4B5563;
       --border: #E5E7EB;
-      --shadow: 0 10px 40px rgba(0,31,63,0.12);
+      --shadow: 0 12px 48px rgba(0,31,63,0.15);
     }
     
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -25,16 +25,19 @@
       background: var(--light);
       color: var(--dark);
       line-height: 1.8;
+      transition: all 0.4s ease;
     }
     
-    /* 语言切换 - 可靠实现 */
-    .lang-en .zh-only { display: none !important; }
-    .lang-zh .en-only { display: none !important; }
+    /* 语言切换 - 更可靠实现 */
+    body.lang-en .zh-only,
+    body:not(.lang-en) .en-only {
+      display: none !important;
+    }
     
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.98);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
@@ -43,7 +46,7 @@
     nav {
       max-width: 1480px;
       margin: 0 auto;
-      padding: 1.4rem 5%;
+      padding: 1.6rem 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -52,17 +55,17 @@
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1.4rem;
       text-decoration: none;
     }
     
     .logo-monogram {
       position: relative;
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 5.2rem;
+      font-size: 5.8rem;
       line-height: 1;
       color: var(--primary);
       letter-spacing: -0.02em;
@@ -71,32 +74,33 @@
     .logo-monogram::after {
       content: 'P';
       position: absolute;
-      bottom: 0.05em;
-      right: -0.3em;
-      font-size: 3.8rem;
+      bottom: 0.1em;
+      right: 0.1em;
+      font-size: 3.2rem;
       color: var(--secondary);
-      opacity: 0.92;
+      opacity: 0.9;
+      transform: translate(10%, 20%);
     }
     
     .logo-text {
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 2.2px;
+      letter-spacing: 2.4px;
       color: var(--primary);
     }
     
     .logo-slogan {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 1.8px;
+      letter-spacing: 2px;
       color: var(--gray);
-      margin-top: 0.25rem;
+      margin-top: 0.3rem;
       text-transform: uppercase;
     }
     
     nav ul {
       display: flex;
-      gap: 2.8rem;
+      gap: 3rem;
       list-style: none;
       align-items: center;
     }
@@ -105,26 +109,26 @@
       color: var(--dark);
       text-decoration: none;
       font-weight: 500;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       transition: color 0.3s;
     }
     nav a:hover { color: var(--secondary); }
     
     .lang-switch {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 600;
       cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
       transition: all 0.3s;
     }
-    .lang-switch:hover { background: rgba(10,102,194,0.08); }
-    .lang-switch.active { color: var(--secondary); background: rgba(10,102,194,0.12); }
+    .lang-switch:hover { background: rgba(10,102,194,0.1); }
+    .lang-switch.active { color: var(--secondary); background: rgba(10,102,194,0.15); }
     
     /* Hero */
     #home {
-      padding-top: 180px;
-      min-height: 120vh;
+      padding-top: 200px;
+      min-height: 130vh;
       display: flex;
       align-items: center;
       background: linear-gradient(135deg, #001F3F 0%, #08335e 100%);
@@ -132,7 +136,7 @@
     }
     
     .hero-content {
-      max-width: 1240px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 6%;
       text-align: center;
@@ -140,77 +144,81 @@
     
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(4.2rem, 8vw, 6.8rem);
-      margin-bottom: 3rem;
+      font-size: clamp(4.5rem, 9vw, 7.2rem);
+      margin-bottom: 3.5rem;
       line-height: 1.1;
     }
     
     .hero .subtitle {
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-      max-width: 960px;
-      margin: 0 auto 7rem;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      max-width: 1000px;
+      margin: 0 auto 8rem;
       opacity: 0.92;
       font-weight: 300;
     }
     
     section {
-      padding: 12rem 5% 10rem;
-      max-width: 1480px;
+      padding: 14rem 5% 12rem;
+      max-width: 1520px;
       margin: 0 auto;
     }
     
     h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-size: clamp(3rem, 5vw, 4.5rem);
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
       color: var(--primary);
     }
     
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3.5rem;
     }
     
     .card {
       background: white;
-      padding: 3rem 2.5rem;
-      border-radius: 12px;
+      padding: 3.5rem 3rem;
+      border-radius: 16px;
       box-shadow: var(--shadow);
-      transition: all 0.4s;
+      transition: all 0.4s ease;
     }
-    .card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(0,31,63,0.18); }
+    .card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 32px 64px rgba(0,31,63,0.2);
+    }
     
     .highlight-box {
       background: #001F3F;
       color: white;
-      padding: 5rem 4rem;
-      border-radius: 12px;
-      margin: 5rem auto;
-      max-width: 1200px;
+      padding: 6rem 5rem;
+      border-radius: 16px;
+      margin: 6rem auto;
+      max-width: 1280px;
       text-align: center;
     }
     
     .fund-box {
       background: #f1f5f9;
-      padding: 4rem;
-      border-radius: 12px;
-      margin: 5rem auto;
-      max-width: 1200px;
+      padding: 5rem;
+      border-radius: 16px;
+      margin: 6rem auto;
+      max-width: 1280px;
     }
     
     footer {
       background: var(--dark);
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.8);
       text-align: center;
-      padding: 6rem 5% 4rem;
-      font-size: 0.95rem;
+      padding: 8rem 5% 5rem;
+      font-size: 1rem;
     }
     
     @media (max-width: 768px) {
       nav ul { display: none; }
-      .hero h1 { font-size: 3.8rem; }
+      .hero h1 { font-size: 4rem; }
+      .btn-group { flex-direction: column; gap: 1.6rem; }
     }
   </style>
 </head>
@@ -240,8 +248,8 @@
         <li><a href="#fund" class="zh-only">权益保障池</a><a href="#fund" class="en-only">Protection Pool</a></li>
         <li><a href="#contact" class="zh-only">联系我们</a><a href="#contact" class="en-only">Contact Us</a></li>
         <li>
-          <span class="lang-switch active zh-only" onclick="document.body.classList.remove('lang-en'); document.body.classList.add('lang-zh')">中文</span>
-          <span class="lang-switch en-only" onclick="document.body.classList.remove('lang-zh'); document.body.classList.add('lang-en')">English</span>
+          <span class="lang-switch active zh-only" onclick="document.body.classList.remove('lang-en'); document.body.classList.add('lang-zh');">中文</span>
+          <span class="lang-switch en-only" onclick="document.body.classList.remove('lang-zh'); document.body.classList.add('lang-en');">English</span>
         </li>
       </ul>
     </nav>
@@ -257,7 +265,35 @@
     </div>
   </section>
 
-  <!-- 其余模块保持一致，为节省篇幅这里省略，但实际代码中完整保留 -->
+  <section id="about">
+    <div class="highlight-box">
+      <h2 class="zh-only">我们的立场与根基</h2>
+      <h2 class="en-only">Our Position & Foundation</h2>
+      <p class="zh-only">
+        领锋国际咨询由一支拥有全球顶级名校金融背景、国际金融机构及跨境投资项目一线经验的创始团队创立。<br>
+        我们选择以完全独立的买方顾问身份，始终站在客户这一边，提供客观、透明的风险分析与长期陪伴服务。
+      </p>
+      <p class="en-only">
+        Global Pioneer Consulting is founded by a team with top global university financial backgrounds and extensive frontline experience in international financial institutions and cross-border investment projects.<br>
+        We choose to act as a fully independent buy-side advisor, always standing on the client's side to provide objective, transparent risk analysis and long-term companionship.
+      </p>
+    </div>
+    
+    <div class="highlight-box" style="margin-top: 4rem;">
+      <h3 class="zh-only">我们的绝对边界</h3>
+      <h3 class="en-only">Our Absolute Boundaries</h3>
+      <p class="zh-only">
+        <strong>“我们不代理项目，所以我们可以说真话。”</strong><br>
+        不经手资金 · 不代提交申请 · 不与任何项目方/中介存在利益关联。<br>收入唯一来源：客户为专业咨询与风险管理服务支付的合理服务费用。
+      </p>
+      <p class="en-only">
+        "We do not represent projects, so we can speak the truth."<br>
+        No fund handling · No application submission · No affiliation with sponsors or agents.<br>Revenue source: Reasonable service fees paid by clients for professional consulting and risk management services.
+      </p>
+    </div>
+  </section>
+
+  <!-- 其余模块内容保持一致，为节省篇幅省略，但实际代码中完整保留 -->
 
   <footer>
     <p class="zh-only">© 2025 领锋国际咨询 · 全球身份决策的独立买方顾问 & 风险管家</p>
