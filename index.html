@@ -12,7 +12,6 @@
     :root {
       --primary: #001F3F;
       --secondary: #0A66C2;
-      --accent: #3B82F6;
       --light: #F9FAFB;
       --dark: #0F172A;
       --gray: #4B5563;
@@ -28,7 +27,7 @@
       line-height: 1.8;
     }
     
-    /* 语言切换 */
+    /* 语言切换核心 */
     .lang-en .zh-only { display: none !important; }
     .lang-zh .en-only { display: none !important; }
     
@@ -60,34 +59,34 @@
     .logo-monogram {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 3.8rem;
-      line-height: 1;
+      font-size: 4rem;
+      line-height: 0.9;
       letter-spacing: -0.02em;
-      color: var(--primary);
       position: relative;
+      color: var(--primary);
     }
     
     .logo-monogram::after {
       content: 'P';
       position: absolute;
-      bottom: -0.15em;
-      right: -0.3em;
-      font-size: 2.6rem;
+      bottom: -0.1em;
+      right: -0.35em;
+      font-size: 2.8rem;
       color: var(--secondary);
-      opacity: 0.9;
+      opacity: 0.92;
     }
     
     .logo-text {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--primary);
     }
     
     .logo-slogan {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 2.2px;
+      letter-spacing: 1.8px;
       color: var(--gray);
       margin-top: 0.2rem;
       text-transform: uppercase;
@@ -164,23 +163,12 @@
       border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: all 0.4s;
       font-size: 1.15rem;
     }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-    }
-    .btn-solid {
-      background: white;
-      color: var(--primary);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-    .btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-    }
+    .btn-outline { background: transparent; border: 2px solid white; color: white; }
+    .btn-solid { background: white; color: var(--primary); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
     
     section {
       padding: 12rem 5% 10rem;
@@ -209,10 +197,7 @@
       box-shadow: var(--shadow);
       transition: all 0.4s;
     }
-    .card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 24px 48px rgba(0,31,63,0.18);
-    }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(0,31,63,0.18); }
     
     .highlight-box {
       background: #001F3F;
@@ -224,13 +209,13 @@
       text-align: center;
     }
     
-    .fund-status {
-      background: #f9fafb;
-      padding: 2rem;
+    .fund-box {
+      background: #f1f5f9;
+      padding: 3rem;
       border-radius: 12px;
+      margin: 5rem auto;
+      max-width: 1000px;
       text-align: center;
-      margin: 4rem auto;
-      max-width: 900px;
     }
     
     footer {
@@ -287,7 +272,7 @@
       <h1 class="en-only">Independent Buy-Side Advisor<br>& Risk Steward for Global Identity Decisions</h1>
       
       <p class="subtitle zh-only">买得明白，拿得安心。我们不代理、不返佣、不碰钱，只帮您看清信息差、拆解风险、做出明智决策。</p>
-      <p class="subtitle en-only">Buy Right. Hold Safe. We don't represent programs, accept commissions, or handle funds. We only help you see clearly, mitigate risks, and decide wisely.</p>
+      <p class="subtitle en-only">Buy Right. Hold Safe. We don't represent, take commissions, or handle funds. We only help you see clearly, mitigate risks, and decide wisely.</p>
     </div>
   </section>
 
@@ -309,8 +294,8 @@
       <div class="card">
         <h3 class="zh-only">深度专业能力</h3>
         <h3 class="en-only">Deep Professional Expertise</h3>
-        <p class="zh-only">多年项目方一线经验，最懂信息差套路、包装水分、隐性条款。</p>
-        <p class="en-only">Frontline project-side experience. Deep understanding of information asymmetry, packaging markups, and hidden terms.</p>
+        <p class="zh-only">多年项目方销售、培训、成交经验，最懂信息差套路、包装水分、隐性条款。</p>
+        <p class="en-only">Years of project-side sales, training and closing experience. Deep understanding of information asymmetry tactics, packaging, and hidden terms.</p>
       </div>
       <div class="card">
         <h3 class="zh-only">纯粹客户视角</h3>
@@ -335,16 +320,16 @@
     
     <div class="grid-3">
       <div class="card">
-        <h3 class="zh-only">初步风险扫描</h3>
-        <h3 class="en-only">Initial Risk Scan</h3>
+        <h3 class="zh-only">初步风险扫描 (L1)</h3>
+        <h3 class="en-only">Initial Risk Scan (L1)</h3>
         <div class="price-tag">999 元</div>
         <p class="zh-only">30-45分钟专家对话 + 1页PDF备忘录<br>快速判断重大红旗 + 是否值得深入</p>
       </div>
       <div class="card">
-        <h3 class="zh-only">单项目深度尽调</h3>
-        <h3 class="en-only">Single Project In-depth Due Diligence</h3>
+        <h3 class="zh-only">单项目深度尽调 (L2)</h3>
+        <h3 class="en-only">Single Project In-depth Due Diligence (L2)</h3>
         <div class="price-tag">2.8万 ~ 4.8万</div>
-        <p class="zh-only">12-20页专业报告 + 30分钟复盘<br>真实成本拆解 + 条款黑箱分析 + 风险评分</p>
+        <p class="zh-only">12-20页结构化报告 + 30min复盘<br>真实成本拆解 + 条款黑箱分析 + 风险评分</p>
       </div>
       <div class="card">
         <h3 class="zh-only">轻度全程陪护</h3>
@@ -374,7 +359,7 @@
   </section>
 
   <section id="fund">
-    <div class="fund-status">
+    <div class="fund-box">
       <h2 class="zh-only">客户权益保护基金</h2>
       <h2 class="en-only">Client Protection Fund</h2>
       <p class="zh-only">我们自愿从每单陪护服务中抽取1.5–2%进入基金池，用于极端情况下对客户的补偿（政策突变、欺诈等）。基金由第三方托管，每年公开收支报告。</p>
