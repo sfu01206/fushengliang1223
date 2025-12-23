@@ -27,7 +27,7 @@
       line-height: 1.8;
     }
     
-    /* 语言切换核心 */
+    /* 语言切换 */
     .lang-en .zh-only { display: none !important; }
     .lang-zh .en-only { display: none !important; }
     
@@ -57,21 +57,23 @@
     }
     
     .logo-monogram {
+      position: relative;
+      width: 80px;
+      height: 80px;
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 4rem;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      position: relative;
+      font-size: 4.5rem;
+      line-height: 1;
       color: var(--primary);
+      letter-spacing: -0.02em;
     }
     
     .logo-monogram::after {
       content: 'P';
       position: absolute;
-      bottom: -0.1em;
-      right: -0.35em;
-      font-size: 2.8rem;
+      bottom: 0;
+      right: -0.2em;
+      font-size: 3.2rem;
       color: var(--secondary);
       opacity: 0.92;
     }
@@ -211,11 +213,10 @@
     
     .fund-box {
       background: #f1f5f9;
-      padding: 3rem;
+      padding: 4rem;
       border-radius: 12px;
       margin: 5rem auto;
-      max-width: 1000px;
-      text-align: center;
+      max-width: 1200px;
     }
     
     footer {
@@ -256,7 +257,7 @@
         <li><a href="#about" class="zh-only">立场与原则</a><a href="#about" class="en-only">Position & Principles</a></li>
         <li><a href="#services" class="zh-only">服务体系</a><a href="#services" class="en-only">Services</a></li>
         <li><a href="#why-us" class="zh-only">为什么选择我们</a><a href="#why-us" class="en-only">Why Choose Us</a></li>
-        <li><a href="#projects" class="zh-only">专注项目</a><a href="#projects" class="en-only">Focus Projects</a></li>
+        <li><a href="#fund" class="zh-only">权益保护基金</a><a href="#fund" class="en-only">Protection Fund</a></li>
         <li><a href="#contact" class="zh-only">联系咨询</a><a href="#contact" class="en-only">Contact</a></li>
         <li>
           <span class="lang-switch active zh-only" onclick="document.body.classList.remove('lang-en'); document.body.classList.add('lang-zh')">中文</span>
