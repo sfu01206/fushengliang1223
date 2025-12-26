@@ -1,293 +1,221 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>领锋国际 | 全球身份决策的独立买方顾问 & 风险管家</title>
-  <meta name="description" content="买得明白，拿得安心。我们不代理、不返佣、不碰钱，只帮助客户看清信息差、拆解风险、做出长期理性决策。" />
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
-  
-  <style>
-    :root {
-      --primary:#001F3F;
-      --secondary:#0A66C2;
-      --light:#F9FAFB;
-      --dark:#0F172A;
-      --gray:#4B5563;
-      --border:#E5E7EB;
-      --shadow:0 10px 40px rgba(0,31,63,.12);
-    }
-
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{
-      font-family:'Noto Sans SC','Inter',system-ui,sans-serif;
-      background:var(--light);
-      color:var(--dark);
-      line-height:1.85;
-    }
-
-    body.lang-en .zh-only{display:none!important;}
-    body.lang-zh .en-only{display:none!important;}
-
-    header{
-      position:fixed;
-      top:0;left:0;right:0;
-      background:rgba(255,255,255,.97);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      z-index:1000;
-    }
-
-    nav{
-      max-width:1480px;
-      margin:0 auto;
-      padding:1.4rem 5%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .logo-container{
-      display:flex;
-      align-items:center;
-      gap:1.2rem;
-      text-decoration:none;
-    }
-
-    .logo-monogram{
-      position:relative;
-      width:100px;height:100px;
-      font-family:'Playfair Display',serif;
-      font-weight:700;
-      font-size:5.5rem;
-      color:var(--primary);
-    }
-    .logo-monogram::after{
-      content:'P';
-      position:absolute;
-      bottom:.1em;
-      right:-.25em;
-      font-size:3.5rem;
-      color:var(--secondary);
-      opacity:.9;
-    }
-
-    .logo-text{
-      font-size:1.5rem;
-      font-weight:700;
-      letter-spacing:2.4px;
-      color:var(--primary);
-    }
-    .logo-slogan{
-      font-size:.85rem;
-      letter-spacing:2px;
-      color:var(--gray);
-      margin-top:.3rem;
-      text-transform:uppercase;
-    }
-
-    nav ul{
-      display:flex;
-      gap:3rem;
-      list-style:none;
-      align-items:center;
-    }
-    nav a{
-      text-decoration:none;
-      color:var(--dark);
-      font-weight:500;
-      font-size:1.05rem;
-    }
-    nav a:hover{color:var(--secondary);}
-
-    .lang-switch{
-      cursor:pointer;
-      padding:.6rem 1.2rem;
-      border-radius:8px;
-      font-weight:600;
-    }
-    .lang-switch.active{
-      color:var(--secondary);
-      background:rgba(10,102,194,.15);
-    }
-
-    #home{
-      padding-top:200px;
-      min-height:130vh;
-      display:flex;
-      align-items:center;
-      background:linear-gradient(135deg,#001F3F 0%,#08335e 100%);
-      color:#fff;
-    }
-
-    .hero-content{
-      max-width:1280px;
-      margin:0 auto;
-      padding:0 6%;
-      text-align:center;
-    }
-
-    .hero h1{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(4.4rem,8vw,7rem);
-      margin-bottom:4rem;
-      line-height:1.1;
-    }
-
-    .hero .subtitle{
-      font-size:clamp(1.6rem,3vw,2.2rem);
-      max-width:1000px;
-      margin:0 auto;
-      font-weight:300;
-      opacity:.92;
-    }
-
-    .hero .subtitle + .subtitle{
-      margin-top:1.8rem;
-    }
-
-    section{
-      padding:14rem 5% 12rem;
-      max-width:1520px;
-      margin:0 auto;
-    }
-
-    h2{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(3rem,5vw,4.5rem);
-      text-align:center;
-      margin-bottom:5rem;
-      color:var(--primary);
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
-      gap:3.5rem;
-    }
-
-    .card{
-      background:#fff;
-      padding:3.5rem 3rem;
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      transition:.4s;
-    }
-    .card:hover{
-      transform:translateY(-12px);
-      box-shadow:0 32px 64px rgba(0,31,63,.18);
-    }
-
-    .price-tag{
-      margin:1.2rem 0;
-      font-weight:600;
-      color:var(--secondary);
-      font-size:1.1rem;
-    }
-
-    .highlight-box{
-      background:#001F3F;
-      color:#fff;
-      padding:6rem 5rem;
-      border-radius:16px;
-      max-width:1280px;
-      margin:0 auto 6rem;
-      text-align:center;
-    }
-
-    .fund-box{
-      background:#f1f5f9;
-      padding:5rem;
-      border-radius:16px;
-      max-width:1280px;
-      margin:0 auto;
-    }
-
-    footer{
-      background:var(--dark);
-      color:rgba(255,255,255,.8);
-      text-align:center;
-      padding:7rem 5% 4rem;
-      font-size:1rem;
-    }
-    footer .value{
-      margin-top:1.5rem;
-      font-size:.95rem;
-      opacity:.7;
-    }
-
-    @media(max-width:768px){
-      nav ul{display:none;}
-      .logo-monogram{width:72px;height:72px;font-size:4.2rem;}
-      .logo-monogram::after{font-size:2.8rem;}
-      .hero h1{font-size:3.8rem;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Pioneer Consulting | 全球身份决策独立顾问</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --prussian-blue: #1A2B3C;
+            --bronze-gold: #C5A059;
+            --charcoal: #33475B;
+            --soft-gray: #E0E0E0;
+        }
+        body {
+            background-color: var(--prussian-blue);
+            color: var(--soft-gray);
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-line {
+            background: linear-gradient(to bottom, transparent, var(--bronze-gold), transparent);
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            animation: scan 4s infinite ease-in-out;
+        }
+        @keyframes scan {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .vault-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--charcoal);
+            color: white;
+        }
+        .vault-input:focus {
+            border-color: var(--bronze-gold);
+            outline: none;
+        }
+        .btn-gold {
+            background-color: var(--bronze-gold);
+            color: var(--prussian-blue);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background-color: #d4b470;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
+<body class="antialiased">
 
-<body class="lang-zh">
-
-<header>
-  <nav>
-    <a href="#home" class="logo-container">
-      <div class="logo-monogram">G</div>
-      <div>
-        <div class="logo-text">GLOBAL PIONEER</div>
-        <div class="logo-slogan">
-          <span class="zh-only">独立咨询顾问</span>
-          <span class="en-only">Independent Advisory</span>
+    <nav class="flex justify-between items-center p-8 max-w-7xl mx-auto">
+        <div class="relative w-16 h-16 flex items-center justify-center border border-gray-600 rounded-full">
+            <div class="gold-line"></div>
+            <span class="text-2xl font-bold tracking-tighter z-10">GP</span>
         </div>
-      </div>
-    </a>
-    <ul>
-      <li><a href="#home" class="zh-only">首页</a><a href="#home" class="en-only">Home</a></li>
-      <li><a href="#about" class="zh-only">立场与根基</a><a href="#about" class="en-only">Foundation</a></li>
-      <li><a href="#services" class="zh-only">服务体系</a><a href="#services" class="en-only">Services</a></li>
-      <li><a href="#fund" class="zh-only">权益保障池</a><a href="#fund" class="en-only">Protection Pool</a></li>
-      <li><a href="#contact" class="zh-only">联系我们</a><a href="#contact" class="en-only">Contact</a></li>
-      <li>
-        <span class="lang-switch active zh-only" onclick="document.body.className='lang-zh'">中文</span>
-        <span class="lang-switch en-only" onclick="document.body.className='lang-en'">EN</span>
-      </li>
-    </ul>
-  </nav>
-</header>
+        <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase">
+            <a href="#methodology" class="hover:text-[#C5A059]">立场</a>
+            <a href="#matrix" class="hover:text-[#C5A059]">矩阵</a>
+            <a href="#services" class="hover:text-[#C5A059]">服务</a>
+            <a href="#vault" class="hover:text-[#C5A059] border border-[#C5A059] px-4 py-1">Vault</a>
+        </div>
+    </nav>
 
-<section id="home">
-  <div class="hero-content">
-    <h1 class="zh-only">全球身份决策的独立买方顾问<br>& 风险管家</h1>
-    <h1 class="en-only">Independent Buy-Side Advisor<br>& Risk Steward</h1>
+    <section class="max-w-5xl mx-auto px-8 py-24 text-center">
+        <h1 class="text-4xl md:text-6xl leading-tight mb-8">
+            在您签署那份价值百万欧元的跨境协议前，<br>
+            您是否拥有过哪怕一个小时，<br>
+            听一听那个完全独立于利益链条之外的声音？
+        </h1>
+        <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            Global Pioneer Consulting —— 全球身份决策独立买方顾问。<br>
+            不参与分佣，只对决策的真实代价负责。
+        </p>
+        <a href="#499" class="btn-gold px-10 py-4 font-bold uppercase tracking-widest inline-block">
+            开启 45 分钟风险对标咨询
+        </a>
+    </section>
 
-    <p class="subtitle zh-only">不代理、不返佣、不碰钱——这是我们的立场。</p>
-    <p class="subtitle zh-only">看清信息差、拆解结构性风险，陪伴您做长期理性决策。</p>
+    <section id="matrix" class="py-24 bg-black bg-opacity-30">
+        <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl mb-6">决策对标矩阵</h2>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    所有的跨境规划都是风险的权衡。我们的<strong>审计逻辑</strong>通过四个核心维度还原真实的路径成本。拖动滑块或切换项目，观察资产与身份的动态博弈。
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-700 hover:border-[#C5A059] transition-colors cursor-pointer">
+                        <span>移民基金：流动性对冲审计</span>
+                        <span class="text-[#C5A059] text-sm">点击分析</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-gray-700 hover:border-[#C5A059] transition-colors cursor-pointer">
+                        <span>移民房产：交易结构水分拆解</span>
+                        <span class="text-[#C5A059] text-sm">点击分析</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-lg">
+                <canvas id="riskRadar"></canvas>
+            </div>
+        </div>
+    </section>
 
-    <p class="subtitle en-only">No representation. No commission. No fund handling.</p>
-    <p class="subtitle en-only">We clarify risks, expose asymmetry, and support long-term decisions.</p>
-  </div>
-</section>
+    <section id="services" class="max-w-7xl mx-auto px-8 py-24">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl mb-4">服务体系与交易优化</h2>
+            <p class="text-gray-400 text-sm tracking-widest uppercase italic">The Auditor Standard</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="border border-gray-800 p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl mb-4">首次深度咨询</h3>
+                    <p class="text-gray-400 text-sm mb-6">Orientation Session</p>
+                    <ul class="text-sm space-y-3 mb-8 text-gray-300">
+                        <li>• 45 分钟线上闭门决策扫描</li>
+                        <li>• 现有方案逻辑盲点识别</li>
+                        <li>• 交付《首次咨询建议简报》</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold mb-4">¥ 499</div>
+                    <button class="w-full py-3 border border-[#C5A059] text-[#C5A059] hover:bg-[#C5A059] hover:text-white transition-all uppercase tracking-widest text-xs">立即预订</button>
+                </div>
+            </div>
 
-<section id="contact">
-  <h2 class="zh-only">联系我们</h2>
-  <h2 class="en-only">Contact Us</h2>
+            <div class="border border-[#C5A059] p-8 flex flex-col justify-between bg-white bg-opacity-5">
+                <div>
+                    <h3 class="text-2xl mb-4 text-[#C5A059]">交易结构审计</h3>
+                    <p class="text-gray-400 text-sm mb-6">The Value Auditor</p>
+                    <ul class="text-sm space-y-3 mb-8 text-gray-300">
+                        <li>• 穿透式资产价值审计</li>
+                        <li>• 非必要交易溢价优化 (水分拆解)</li>
+                        <li>• 极端退出路径模拟演练</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold mb-4">¥ 25,000 <span class="text-sm font-normal text-gray-500">起</span></div>
+                    <button class="w-full py-3 btn-gold uppercase tracking-widest text-xs font-bold">启动审计</button>
+                </div>
+            </div>
 
-  <p class="zh-only" style="text-align:center;max-width:800px;margin:0 auto 3rem;color:var(--gray);">
-    如果您希望在重大身份或投资决策前，先获得一份冷静、独立的专业判断，欢迎与我们沟通。
-  </p>
+            <div class="border border-gray-800 p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl mb-4">全周期风险监护</h3>
+                    <p class="text-gray-400 text-sm mb-6">The Navigator</p>
+                    <ul class="text-sm space-y-3 mb-8 text-gray-300">
+                        <li>• 身份存续合规全程监控</li>
+                        <li>• 变政后的应对路径二次审计</li>
+                        <li>• 资产清算阶段的独立监督</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold mb-4">¥ 100,000 <span class="text-sm font-normal text-gray-500">起</span></div>
+                    <button class="w-full py-3 border border-gray-700 text-gray-500 uppercase tracking-widest text-xs">仅限内邀</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div style="text-align:center;">
-    <p style="font-size:1.8rem;font-weight:700;color:var(--secondary);">
-      contact@globalpioneer.consulting
-    </p>
-    <p style="margin-top:1rem;">微信：GlobalPioneer</p>
-  </div>
-</section>
+    <section id="vault" class="max-w-3xl mx-auto px-8 py-24 text-center">
+        <div class="border-t border-b border-gray-800 py-16">
+            <h2 class="text-3xl mb-8">决策资产库 (The Vault)</h2>
+            <p class="text-gray-400 mb-8 text-sm">
+                加密受保护的审计报告交付区。请输入您的专属 Access Key。
+            </p>
+            <div class="flex max-w-md mx-auto">
+                <input type="password" class="vault-input flex-grow px-4 py-3 text-center tracking-widest" placeholder="ENTER ACCESS KEY">
+                <button class="bg-white text-black px-6 py-3 font-bold">解锁</button>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <p class="zh-only">© 2025 领锋国际咨询 · 独立买方顾问</p>
-  <p class="en-only">© 2025 Global Pioneer Consulting · Independent Advisory</p>
-  <div class="value">Independent judgment · Long-term responsibility</div>
-</footer>
+    <footer class="py-12 border-t border-gray-900 text-center text-xs text-gray-600 tracking-widest uppercase">
+        <p>© 2025 Global Pioneer Consulting. 立场独立，逻辑穿透。</p>
+    </footer>
 
+    <script>
+        // Risk Radar Logic
+        const ctx = document.getElementById('riskRadar').getContext('2d');
+        const riskRadar = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['法律合规性', '资产流动性', '持有总成本', '身份存续力', '时间确定性'],
+                datasets: [{
+                    label: '典型移民基金方案',
+                    data: [90, 40, 70, 85, 95],
+                    fill: true,
+                    backgroundColor: 'rgba(197, 160, 89, 0.2)',
+                    borderColor: '#C5A059',
+                    pointBackgroundColor: '#C5A059',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#C5A059'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { color: '#33475B' },
+                        grid: { color: '#33475B' },
+                        pointLabels: { color: '#E0E0E0', font: { size: 12 } },
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
