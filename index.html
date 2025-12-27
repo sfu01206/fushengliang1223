@@ -2,255 +2,178 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GP Partners | 独立决策顾问</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GP Partners | 全球身份决策独立研判</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;600&family=Noto+Sans+SC:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root { --p-blue: #0d151f; --gold: #C5A059; --text: #d1d5db; }
-        body { background-color: var(--p-blue); color: var(--text); font-family: 'Noto Sans SC', sans-serif; scroll-behavior: smooth; }
+        :root { --p-blue: #0d151f; --gold: #C5A059; --text-gray: #94a3b8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--p-blue); color: #d1d5db; font-family: 'Noto Sans SC', sans-serif; overflow: hidden; }
         .font-serif { font-family: 'Noto Serif SC', serif; }
 
-        /* --- 顶级 LOGO (70px 建筑感) --- */
+        /* --- 顶级 LOGO (响应式) --- */
         .logo-box {
-            position: relative; width: 70px; height: 70px; border: 1px solid rgba(197, 160, 89, 0.3);
+            position: relative; width: 70px; height: 70px; border: 2px solid rgba(197, 160, 89, 0.5);
             border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-        .logo-text { font-weight: 100; font-size: 20px; letter-spacing: 0.2em; color: white; z-index: 10; }
-        .scan-line {
-            position: absolute; width: 100%; height: 1.5px; 
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            box-shadow: 0 0 12px var(--gold); top: -2px; 
-            animation: scan-precision 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        @media (max-width: 768px) { .logo-box { width: 55px; height: 55px; } .logo-text { font-size: 24px !important; } }
+        .logo-text { font-weight: 700; font-size: 28px; color: white; z-index: 10; font-family: Arial, sans-serif; }
+        .scan-line-v {
+            position: absolute; height: 100%; width: 3px; 
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
+            box-shadow: 0 0 15px var(--gold); left: -5px; 
+            animation: scan-v 4s ease-in-out infinite;
         }
-        @keyframes scan-precision { 0% { top: -10%; } 50% { top: 50%; } 100% { top: 110%; } }
+        @keyframes scan-v { 0%, 100% { left: 0%; opacity: 0; } 50% { left: 100%; opacity: 1; } }
 
-        /* --- 导航栏：轻盈与平衡 --- */
-        nav { background: rgba(13, 21, 31, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.03); }
-        nav a { transition: all 0.4s ease; letter-spacing: 0.15em; font-size: 13px; }
-        nav a:hover { color: var(--gold); }
+        /* --- 导航栏 (响应式隐藏/显示) --- */
+        nav { 
+            background: rgba(10, 17, 26, 0.95); backdrop-filter: blur(20px); 
+            border-bottom: 2px solid var(--gold); z-index: 100;
+        }
+        @media (max-width: 1024px) { .nav-links { display: none; } } /* 手机端可后续加菜单按钮 */
 
-        /* --- 模块化：一屏一重点 --- */
-        .full-page-section { 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            padding: 0 10%;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+        /* --- 全屏容器与响应式字体 --- */
+        .page-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
+        .section { 
+            height: 100vh; scroll-snap-align: start; 
+            display: flex; flex-direction: column; justify-content: center; 
+            padding: 0 12%; position: relative; width: 100%;
+        }
+        @media (max-width: 768px) { .section { padding: 0 8%; } }
+
+        .hero-h1 { font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1.8; letter-spacing: 0.15em; font-weight: 700; color: white; }
+        .section-h2 { font-size: clamp(1.5rem, 3.5vw, 2.8rem); margin-bottom: 2rem; letter-spacing: 0.1em; color: white; }
+        .content-p { font-size: clamp(0.95rem, 1.5vw, 1.25rem); line-height: 2.2; color: var(--text-gray); max-width: 1000px; }
+
+        /* --- 模块专用样式 --- */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; width: 100%; }
+        .vault-input { 
+            background: transparent; border-bottom: 2px solid #334155; 
+            font-size: clamp(1.2rem, 3vw, 2rem); width: 100%; max-width: 400px; text-align: center; color: white; outline: none; margin-bottom: 2rem;
         }
 
-        /* --- 字体格局强化 --- */
-        .hero-title { line-height: 2.2; letter-spacing: 0.18em; font-size: 2.8rem; }
-        .section-title { font-size: 2.2rem; margin-bottom: 3rem; letter-spacing: 0.15em; color: white; }
-        .section-desc { font-size: 1.1rem; line-height: 2.6; color: #94a3b8; max-width: 800px; font-weight: 300; }
-        .gold-underline { border-bottom: 2px solid var(--gold); color: var(--gold); padding-bottom: 4px; }
-
-        /* 水印 */
-        .wm { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.02; z-index: 9999; display: flex; flex-wrap: wrap; }
+        .watermark { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.02; z-index: 1; display: flex; flex-wrap: wrap; transform: rotate(-20deg); }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="wm" class="wm"></div>
+    <div class="watermark" id="wm"></div>
 
-    <nav class="fixed top-0 w-full z-50">
-        <div class="max-w-[1400px] mx-auto px-12 py-5 flex justify-between items-center">
+    <nav class="fixed top-0 w-full">
+        <div class="max-w-[1600px] mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
             <div class="logo-box">
-                <div class="scan-line"></div>
+                <div class="scan-line-v"></div>
                 <span class="logo-text">GP</span>
             </div>
-            <div class="hidden lg:flex space-x-12 font-light">
-                <a href="#stance">核心立场</a>
-                <a href="#principles">关于我们</a>
-                <a href="#matrix">研判矩阵</a>
-                <a href="#insights">非共识观点</a>
-                <a href="#services">顾问服务</a>
-                <a href="#vault" class="px-6 py-2 border border-[#C5A059] text-[#C5A059] hover:bg-[#C5A059] hover:text-[#0d151f]">加密厅 VAULT</a>
+            <div class="nav-links flex space-x-10">
+                <a href="#stance" class="text-sm tracking-widest hover:text-[#C5A059]">核心立场</a>
+                <a href="#about" class="text-sm tracking-widest hover:text-[#C5A059]">合规哨所</a>
+                <a href="#property" class="text-sm tracking-widest hover:text-[#C5A059]">资产回归</a>
+                <a href="#services" class="text-sm tracking-widest hover:text-[#C5A059]">顾问体系</a>
+                <a href="#vault" class="border border-[#C5A059] px-5 py-1 text-[#C5A059] text-sm">VAULT</a>
             </div>
         </div>
     </nav>
 
-    <section class="full-page-section text-center items-center">
-        <h1 class="hero-title font-serif text-white">
-            在您签署那份价值百万欧元的<br>
-            <span class="gold-underline">跨境协议前</span>，<br>
-            您是否拥有过哪怕一个小时，<br>
-            听一听那个完全独立于利益链条之外的声音？
-        </h1>
-        <div class="mt-24 space-y-6">
-            <p class="text-lg tracking-[0.5em] text-gray-400 font-light">Global Pioneer Consulting —— 全球身份决策独立买方顾问</p>
-            <p class="text-sm tracking-[0.3em] text-gray-500">不参与分佣，只对决策的真实代价负责</p>
-        </div>
-        <button onclick="document.getElementById('stance').scrollIntoView()" class="mt-20 bg-[#C5A059] text-[#0d151f] px-16 py-5 text-sm tracking-[0.4em] font-bold hover:bg-[#d4b470] transition">
-            开启 45 分钟风险对标咨询
-        </button>
-    </section>
+    <div class="page-container">
+        <section id="hero" class="section items-center text-center">
+            <h1 class="hero-h1 font-serif">
+                在您签署那份价值<span class="text-[#C5A059]">百万级</span>的<br>
+                跨境法律安排前，<br>
+                您是否听过独立于利益链之外的声音？
+            </h1>
+            <div class="mt-12 md:mt-20">
+                <p class="text-sm md:text-lg text-gray-400 tracking-[0.4em] mb-4 uppercase">Global Pioneer Partners</p>
+                <p class="text-xs md:text-sm text-gray-500 tracking-[0.2em]">独立买方顾问 · 利益中立 · 决策穿透</p>
+            </div>
+            <button class="mt-12 md:mt-20 bg-[#C5A059] text-black px-10 md:px-16 py-4 md:py-6 font-bold text-sm md:text-lg tracking-[0.4em] hover:bg-[#d4b470] transition">
+                身份资产“熔断式”风险穿透
+            </button>
+        </section>
 
-    <section id="stance" class="full-page-section">
-        <h2 class="section-title font-serif">绝对的利益隔离立场</h2>
-        <p class="section-desc">
-            GP Partners 的底层逻辑非常简单：我们拒绝接受任何项目方或中介的分佣。
-            <br><br>
-            因为我们深知，当顾问的收益与您的成交金额挂钩时，独立性便不复存在。
-            我们的收益仅来源于您的顾问费用，这确保了我们能以“穿透式”的角度，为您还原每一笔交易背后的真实代价。
-        </p>
-    </section>
+        <section id="stance" class="section">
+            <h2 class="section-h2 font-serif">利益隔离与决策主权</h2>
+            <p class="content-p">
+                我们奉行物理学中的**奥卡姆剃刀原则**：如无必要，勿增实体。
+                <br><br>
+                在复杂的交易结构中，不透明的层级往往意味着决策主权的流失。GP Partners 彻底切断与执行端的经济关联，确保研判结果仅服务于您的资产安全。我们不参与代办，我们只负责为您夺回属于决策者的**逻辑独立性**。
+            </p>
+        </section>
 
-    <section id="principles" class="full-page-section">
-        <div class="grid md:grid-cols-2 gap-32">
-            <div>
-                <h2 class="section-title font-serif">背景介绍</h2>
-                <p class="section-desc">
-                    核心团队深耕全球身份赛道多年，曾是顶级项目方的规则制定者与高管。
-                    我们见证过无数溢价的诞生与风险的包装，现在，我们选择站在买方一侧，用穿透式的视角拆解这些迷雾。
-                </p>
-            </div>
-            <div>
-                <h2 class="section-title font-serif">逻辑穿透准则</h2>
-                <p class="section-desc">
-                    我们不看营销手册，我们只验证底层资产。
-                    从法案边界、资产权属到退出机制的确定性，我们用严苛的数据模型，对您的每一项跨境决策进行极限压力测试。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="matrix" class="full-page-section">
-        <div class="grid lg:grid-cols-2 gap-24 items-center">
-            <div class="bg-[#111a24] p-16 border border-gray-800/50 shadow-2xl">
-                <canvas id="radar"></canvas>
-            </div>
-            <div class="space-y-12">
-                <h2 class="section-title font-serif">五维决策研判矩阵</h2>
-                <div class="space-y-8">
-                    <div class="border-l-2 border-[#C5A059] pl-8 py-2">
-                        <h4 class="text-[#C5A059] text-sm mb-3 font-bold uppercase tracking-widest">路径研判 A：资产类项目</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">对标真实市场价值，识别管理费陷阱与底层质押逻辑。确保您的资产在拥有身份的同时，具备真实的流动性。</p>
-                    </div>
-                    <div class="border-l-2 border-[#C5A059] pl-8 py-2">
-                        <h4 class="text-[#C5A059] text-sm mb-3 font-bold uppercase tracking-widest">路径研判 B：人才类项目</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">穿透主权法律的自由裁量权，验证申请资料的逻辑一致性，预警程序性合规风险。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="insights" class="full-page-section">
-        <h2 class="section-title font-serif text-center mb-24">非共识观点库</h2>
-        <div class="grid md:grid-cols-3 gap-12">
-            <div class="p-12 border border-gray-800 bg-white/[0.01] hover:border-[#C5A059] transition-all cursor-pointer group">
-                <span class="text-[#C5A059] text-xs block mb-8 tracking-[0.3em]">INSIGHT 01</span>
-                <h4 class="text-xl text-white font-serif leading-relaxed group-hover:text-[#C5A059]">办理土耳其移民的路径<br>及结果探讨</h4>
-            </div>
-            <div class="p-12 border border-gray-800 bg-white/[0.01] hover:border-[#C5A059] transition-all cursor-pointer group">
-                <span class="text-[#C5A059] text-xs block mb-8 tracking-[0.3em]">INSIGHT 02</span>
-                <h4 class="text-xl text-white font-serif leading-relaxed group-hover:text-[#C5A059]">你怎么知道你买的房产<br>是有价值的还是一纸空文？</h4>
-            </div>
-            <div class="p-12 border border-gray-800 bg-white/[0.01] hover:border-[#C5A059] transition-all cursor-pointer group">
-                <span class="text-[#C5A059] text-xs block mb-8 tracking-[0.3em]">INSIGHT 03</span>
-                <h4 class="text-xl text-white font-serif leading-relaxed group-hover:text-[#C5A059]">全球最新护照<br>使用风险解读</h4>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="full-page-section">
-        <h2 class="section-title font-serif text-center mb-24">服务体系与交易优化</h2>
-        <div class="grid md:grid-cols-3 gap-10">
-            <div class="p-16 border border-gray-800 flex flex-col justify-between">
+        <section id="about" class="section">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-24">
                 <div>
-                    <h3 class="text-white text-2xl font-serif mb-4">首次深度咨询</h3>
-                    <p class="text-gray-500 text-sm mb-12 tracking-widest uppercase">Orientation Session</p>
-                    <ul class="text-sm space-y-6 text-gray-400 font-light">
-                        <li>· 45 分钟线上闭门决策扫描</li>
-                        <li>· 现有方案逻辑盲点识别</li>
-                        <li>· 交付《首次咨询建议简报》</li>
-                    </ul>
-                </div>
-                <div class="mt-16 text-3xl font-light text-[#C5A059]">¥ 499</div>
-            </div>
-            <div class="p-16 border-2 border-[#C5A059] bg-white/[0.02] flex flex-col justify-between relative scale-105">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#C5A059] text-[#0d151f] px-6 py-1 text-[10px] font-bold tracking-[0.3em]">主流选择</div>
-                <div>
-                    <h3 class="text-[#C5A059] text-2xl font-serif mb-4">交易结构穿透</h3>
-                    <p class="text-gray-500 text-sm mb-12 tracking-widest uppercase">The Value Verifier</p>
-                    <ul class="text-sm space-y-6 text-gray-200">
-                        <li>· 穿透式资产价值核验</li>
-                        <li>· 非必要交易溢价优化 (水分拆解)</li>
-                        <li>· 极端退出路径模拟演练</li>
-                    </ul>
-                </div>
-                <div class="mt-16 text-3xl font-light text-[#C5A059]">¥ 25,000 <span class="text-sm">起</span></div>
-            </div>
-            <div class="p-16 border border-gray-800 flex flex-col justify-between opacity-70">
-                <div>
-                    <h3 class="text-white text-2xl font-serif mb-4">全周期风险监护</h3>
-                    <p class="text-gray-500 text-sm mb-12 tracking-widest uppercase">The Navigator</p>
-                    <ul class="text-sm space-y-6 text-gray-400 font-light">
-                        <li>· 身份存续合规全程监控</li>
-                        <li>· 变政后的应对路径二次验证</li>
-                        <li>· 资产清算阶段的独立监督</li>
-                    </ul>
-                </div>
-                <div class="mt-16 text-3xl font-light text-[#C5A059]">¥ 100,000 <span class="text-sm">起</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="vault" class="full-page-section items-center">
-        <h2 class="section-title font-serif">决策资产库 (The Vault)</h2>
-        <p class="text-gray-500 text-sm mb-16 tracking-[0.4em]">加密受保护的验证报告交付区。请输入您的专属 Access Key。</p>
-        <div class="flex w-full max-w-2xl border-b border-gray-700 py-4">
-            <input type="password" class="bg-transparent flex-grow text-center text-2xl tracking-[1.5em] outline-none text-white font-light" placeholder="••••">
-            <button class="bg-white text-[#0d151f] px-10 py-3 font-bold tracking-widest hover:bg-[#C5A059] transition">解锁</button>
-        </div>
-    </section>
-
-    <footer class="py-32 px-10 border-t border-gray-900 bg-[#0a1118]">
-        <div class="max-w-6xl mx-auto space-y-16">
-            <div class="grid md:grid-cols-2 gap-20">
-                <div class="space-y-6">
-                    <h4 class="text-white text-sm font-bold tracking-[0.3em]">合规边界 Compliance</h4>
-                    <p class="text-[11px] text-gray-600 leading-relaxed uppercase tracking-widest">
-                        本机构不提供法律代办服务。所有研判结论仅基于逻辑穿透与公开数据对标。针对主权法案突变或第三方提供虚假资料导致的决策偏差，本机构不承担连带责任。
+                    <h2 class="text-2xl md:text-4xl font-serif text-white mb-6">合规监测哨所</h2>
+                    <p class="content-p text-base md:text-lg">
+                        基于开源情报（OSINT）建立的政策动态监测模型。我们通过深度建模破译法案变迁背后的底层逻辑，比市场更敏锐地感知波动。
                     </p>
                 </div>
-                <div class="text-right">
-                    <p class="text-[12px] text-gray-500 tracking-[0.5em] mb-4">GP PARTNERS · 全球身份独立研判机构</p>
-                    <p class="text-[10px] text-gray-700 uppercase">Established 2025 · Independent Buyer's Counsel</p>
+                <div>
+                    <h2 class="text-2xl md:text-4xl font-serif text-white mb-6">方法论：熵减研判</h2>
+                    <p class="content-p text-base md:text-lg">
+                        身份安排的确定性随时间自然损耗。我们的价值在于通过持续的负熵流动——即**“路径对标”**——维持您跨境结构的有序。
+                    </p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <section id="property" class="section">
+            <h2 class="section-h2 font-serif">资产价值回归校准</h2>
+            <p class="content-p">
+                针对房产及金融资产类路径，我们提供核心的**“价值回归”测试**。
+                <br><br>
+                通过剔除身份溢价等非市场性冗余因子，我们为您还原资产在主权国家二手市场的真实流动性表现。这不仅是一份研判，更是确保您的百万级投入能在十年后依然具备**防御力**的资产锚点。
+            </p>
+        </section>
+
+        <section id="services" class="section">
+            <h2 class="section-h2 font-serif text-center">多维决策监护体系</h2>
+            <div class="card-grid mt-8">
+                <div class="p-8 border border-gray-800 bg-white/5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-serif text-white mb-4">首次路径扫描</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-10">45分钟“熔断式”风险穿透，快速识别现有执行方案的逻辑盲点。</p>
+                    </div>
+                    <div class="text-2xl text-[#C5A059]">¥ 499</div>
+                </div>
+                <div class="p-8 border-2 border-[#C5A059] bg-[#C5A059]/5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-serif text-[#C5A059] mb-4">交易价值回归研判</h3>
+                        <p class="text-xs text-gray-200 leading-relaxed mb-10">全路径执行成本结构还原，剥离非理性冗余，进行合约压力测试。</p>
+                    </div>
+                    <div class="text-2xl text-[#C5A059]">¥ 25,000 <span class="text-sm">起</span></div>
+                </div>
+                <div class="p-8 border border-gray-800 bg-white/5 flex flex-col justify-between opacity-50">
+                    <div>
+                        <h3 class="text-xl font-serif text-white mb-4">全周期风险监护</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-10">身份存续合规全程追踪，针对突发变政提供二次验证服务。</p>
+                    </div>
+                    <div class="text-sm italic">仅限邀约</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vault" class="section items-center">
+            <h2 class="section-h2 font-serif">决策资产库 (The Vault)</h2>
+            <p class="text-gray-500 text-xs md:text-sm mb-12 tracking-[0.4em] text-center">加密保护的研判报告交付区。请输入 Access Key。</p>
+            <div class="flex flex-col items-center w-full">
+                <input type="password" class="vault-input" placeholder="••••">
+                <button class="bg-white text-black px-12 py-3 font-bold tracking-widest hover:bg-[#C5A059] transition">解锁报告</button>
+            </div>
+        </section>
+    </div>
 
     <script>
-        const ctx = document.getElementById('radar').getContext('2d');
-        new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['法律稳定性', '退出流动性', '持有总成本', '身份续航力', '时间确定性'],
-                datasets: [{
-                    data: [8.5, 5.5, 7, 9, 8],
-                    backgroundColor: 'rgba(197, 160, 89, 0.05)',
-                    borderColor: '#C5A059',
-                    borderWidth: 1.5, pointRadius: 3, pointBackgroundColor: '#C5A059'
-                }]
-            },
-            options: {
-                scales: { r: { angleLines: {color: '#2d3748'}, grid: {color: '#2d3748'}, pointLabels: {color: '#64748b', font: {size: 13, weight: '300'}}, ticks: {display: false} } },
-                plugins: { legend: { display: false } }
-            }
-        });
-
+        // 水印逻辑
         const wm = document.getElementById('wm');
-        for (let i = 0; i < 40; i++) {
-            const span = document.createElement('span');
-            span.innerText = "GP-PARTNERS-CONFIDENTIAL";
-            span.style.padding = "50px";
-            span.style.transform = "rotate(-25deg)";
-            wm.appendChild(span);
+        for (let i = 0; i < 50; i++) {
+            const el = document.createElement('div');
+            el.innerText = 'GP PARTNERS CONFIDENTIAL';
+            el.style.margin = '40px';
+            wm.appendChild(el);
         }
     </script>
 </body>
