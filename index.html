@@ -1,196 +1,35 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GP Partners | 全球资产安全与跨境风险研判合伙人</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Noto+Serif+SC:wght@300;500&display=swap" rel="stylesheet">
-    <style>
-        /* 核心视觉定调：普鲁士蓝与古铜金 */
-        :root {
-            --prussian-blue: #0d151f;
-            --bronze-gold: #C5A059;
-            --cool-gray: #d1d5db;
-            --white-pure: #ffffff;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--prussian-blue);
-            font-family: 'Montserrat', 'Noto Serif SC', serif;
-            color: var(--cool-gray);
-            overflow-x: hidden;
-        }
-
-        /* 4秒周期金色扫描线动效 */
-        @keyframes scan {
-            0% { top: -10%; opacity: 0; }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.5; }
-            100% { top: 110%; opacity: 0; }
-        }
-
-        .scanning-line {
-            position: fixed;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--bronze-gold), transparent);
-            box-shadow: 0 0 15px var(--bronze-gold);
-            z-index: 9999;
-            pointer-events: none;
-            animation: scan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        /* 头部导航与Logo架构 */
-        header {
-            padding: 40px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        /* 70px 圆形边框 Logo 与极细 GP 字体 */
-        .logo-circle {
-            width: 70px;
-            height: 70px;
-            border: 1px solid var(--bronze-gold);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .logo-text {
-            color: var(--bronze-gold);
-            font-size: 24px;
-            font-weight: 200;
-            letter-spacing: 4px;
-        }
-
-        nav a {
-            color: var(--white-pure);
-            text-decoration: none;
-            margin-left: 40px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        nav a:hover { color: var(--bronze-gold); }
-
-        /* 首屏 Hero Section：视觉断句与静奢感 */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-        }
-
-        .hero h1 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 48px;
-            font-weight: 300;
-            color: var(--white-pure);
-            line-height: 2.0; /* 讨论中确定的行高 */
-            letter-spacing: 6px; /* 讨论中确定的字间距 */
-        }
-
-        .hero h1 span {
-            display: block; /* 实现视觉断句 */
-            margin-bottom: 10px;
-        }
-
-        .hero .subtitle {
-            font-size: 14px;
-            color: var(--bronze-gold);
-            letter-spacing: 8px;
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-
-        /* Vault 准入入口 */
-        .vault-entry {
-            margin-top: 60px;
-            border-left: 1px solid var(--bronze-gold);
-            padding-left: 30px;
-        }
-
-        .btn-vault {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--bronze-gold);
-            color: var(--bronze-gold);
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 3px;
-            transition: all 0.4s;
-        }
-
-        .btn-vault:hover {
-            background-color: var(--bronze-gold);
-            color: var(--prussian-blue);
-        }
-
-        /* 底部立场对决声明 */
-        .stance-bar {
-            position: absolute;
-            bottom: 40px;
-            left: 10%;
-            font-size: 11px;
-            letter-spacing: 1px;
-            color: rgba(209, 213, 219, 0.5);
-        }
-    </style>
-</head>
-<body>
-
+<section class="hero-section">
     <div class="scanning-line"></div>
-
-    <header>
-        <div class="logo-container">
-            <div class="logo-circle">
-                <div class="logo-text">GP</div>
-            </div>
-            <div style="margin-left: 20px; letter-spacing: 3px; font-size: 14px; color: var(--white-pure);">PARTNERS</div>
-        </div>
-        <nav>
-            <a href="#stance">立场 / Stance</a>
-            <a href="#matrix">矩阵 / Matrix</a>
-            <a href="#about">关于 / About</a>
-            <a href="#vault" style="color: var(--bronze-gold);">保险库 / Vault</a>
+    
+    <div class="content-wrapper">
+        <nav class="top-nav">
+            <span class="logo">GP PARTNERS</span>
+            <div class="lang-switch">CN / EN</div>
         </nav>
-    </header>
 
-    <main class="hero">
-        <div class="subtitle">Independent Buy-Side Advisor</div>
-        <h1>
-            <span>We Verify.</span>
-            <span>You Decide.</span>
-        </h1>
-        <div class="hero-description" style="max-width: 600px; line-height: 1.8; font-size: 15px;">
-            在跨境资产配置的黑盒中，我们拒绝任何第三方佣金。
-            <br>通过第一性原理，剥离包租泡沫，穿透权力红线。
+        <div class="manifesto">
+            <p class="subtitle">Independent Buy-Side Advisor</p>
+            <h1>We Verify. You Decide.</h1>
+            <h2>全球身份决策的独立判断体系</h2>
+            
+            <div class="three-zeros">
+                <span>不代理任何交易项目</span>
+                <span class="divider">|</span>
+                <span>不收受供应商返佣</span>
+                <span class="divider">|</span>
+                <span>不经手跨境资金</span>
+            </div>
         </div>
-
-        <div class="vault-entry">
-            <p style="font-size: 12px; margin-bottom: 20px;">[ 仅对授权合伙人及 L2/L3 付费客户开放 ]</p>
-            <a href="#" class="btn-vault">进入私域研判保险库 / ENTER VAULT</a>
-        </div>
-    </main>
-
-    <div class="stance-bar">
-        独立性对赌：若查实 GP Partners 与任何项目方有暗佣往来，十倍赔付咨询费。
     </div>
+</section>
 
-</body>
-</html>
+<section class="lemon-logic">
+    <div class="lemon-icon">
+        <svg></svg>
+    </div>
+    <h3>The Lemon Logic / 柠檬逻辑</h3>
+    <p>
+        在信息不对称的市场中，由于逆向选择，次品资产（Lemons）往往驱逐优质资产。<br>
+        GP Partners 的使命是作为您的“逻辑过滤器”，剥离包装，直视内核。
+    </p>
+</section>
