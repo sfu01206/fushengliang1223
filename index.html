@@ -4,133 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GP Partners | Independent Proxy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600&family=Noto+Serif+SC:wght@200;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0b1218; /* 普鲁士深蓝 */
             --gold: #C5A059; /* 古铜金 */
             --text-dim: #8e959b;
             --text-light: #f5f5f5;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
             margin: 0; padding: 0;
             background-color: var(--bg);
             color: var(--text-light);
-            font-family: var(--font-main);
+            font-family: 'Inter', 'Noto Serif SC', sans-serif;
             overflow-x: hidden;
         }
 
-        /* 静态星尘逻辑粒子背景 */
+        /* 静态逻辑粒子背景 */
         .stars-bg {
             position: fixed; width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.15) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -1;
+            background-image: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.1) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: -1; opacity: 0.5;
         }
 
         header {
-            padding: 50px 8%;
+            padding: 40px 8%;
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* 方碑式 Logo：加厚加粗 */
+        /* 方碑 Logo 逻辑 */
         .logo-box {
-            border: 2px solid var(--gold);
-            padding: 8px 20px;
-            display: flex;
+            border: 1px solid var(--gold);
+            padding: 5px 15px;
+            display: inline-flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
         .logo-text {
-            font-size: 28px; font-weight: 900; 
-            letter-spacing: 3px; color: var(--gold);
-            line-height: 1;
+            font-size: 24px; font-weight: 600; /* 加厚加粗 */
+            letter-spacing: 2px; color: var(--gold);
         }
 
         nav a {
             color: var(--text-dim); text-decoration: none;
-            font-size: 11px; letter-spacing: 2px; margin-left: 40px;
-            text-transform: uppercase; transition: 0.3s;
+            font-size: 12px; letter-spacing: 2px; margin-left: 30px;
+            transition: 0.3s;
         }
         nav a:hover { color: var(--gold); }
 
         .hero {
-            height: 80vh; display: flex; flex-direction: column;
+            height: 90vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
             padding: 0 10%;
         }
 
         .hero-tag {
-            font-size: 12px; letter-spacing: 6px; color: var(--gold);
-            margin-bottom: 24px; font-weight: 300;
+            font-size: 11px; letter-spacing: 5px; color: var(--gold);
+            margin-bottom: 20px; text-transform: uppercase;
         }
 
         .hero h1 {
-            font-size: 64px; font-weight: 200; margin: 0; letter-spacing: 15px;
-            color: #ffffff;
+            font-size: clamp(32px, 5vw, 64px); font-weight: 100;
+            margin: 0; letter-spacing: 12px;
         }
 
         .hero h2 {
-            font-size: 20px; font-weight: 300; color: var(--gold);
-            letter-spacing: 10px; margin-top: 25px;
+            font-size: 18px; font-weight: 200; color: var(--gold);
+            letter-spacing: 8px; margin-top: 20px;
         }
 
-        /* 核心对账指标：10X, 0%, 100% */
+        /* 三大核心指标 */
         .metrics {
-            margin-top: 100px; display: flex; gap: 100px;
+            margin-top: 80px; display: flex; gap: 80px;
         }
         .metric-item { text-align: center; }
-        .metric-value { font-size: 42px; font-weight: 700; color: var(--gold); display: block; }
-        .metric-label { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); margin-top: 12px; }
+        .metric-value { font-size: 36px; font-weight: 600; color: var(--gold); display: block; }
+        .metric-label { font-size: 10px; letter-spacing: 2px; color: var(--text-dim); margin-top: 10px; }
 
-        /* 业务红线：三不原则 */
+        /* 业务红线 - 三不原则 */
         .red-lines {
-            padding: 120px 10%; text-align: center;
+            padding: 100px 10%; text-align: center;
             border-top: 1px solid rgba(197, 160, 89, 0.1);
-            background: linear-gradient(180deg, rgba(11,18,24,1) 0%, rgba(13,21,29,1) 100%);
         }
         .line-item {
-            font-size: 18px; letter-spacing: 5px; color: var(--text-light);
-            margin: 40px 0; display: block; font-weight: 300;
+            font-size: 16px; letter-spacing: 4px; color: var(--text-light);
+            margin: 30px 0; display: block; font-weight: 300;
         }
 
-        /* 委任书立场：孤独的买方代理 */
+        /* 委任书立场 */
         .mandate {
-            padding: 150px 15%; text-align: center;
+            padding: 120px 15%; background: rgba(197, 160, 89, 0.03);
+            text-align: center;
         }
         .mandate h3 {
-            font-size: 28px; color: var(--gold); letter-spacing: 5px; margin-bottom: 50px;
-            font-weight: 500;
+            font-size: 24px; color: var(--gold); letter-spacing: 4px; margin-bottom: 40px;
         }
         .mandate p {
-            font-size: 17px; line-height: 2.2; color: #b1b1b1; max-width: 850px; margin: 0 auto;
-            text-align: justify;
+            font-size: 16px; line-height: 2; color: #aaa; max-width: 800px; margin: 0 auto;
+        }
+
+        /* 柠檬图标模拟 */
+        .lemon-logic {
+            margin-top: 60px; opacity: 0.6;
+            font-size: 12px; letter-spacing: 1px;
+        }
+        .lemon-icon {
+            width: 24px; height: 16px; border: 1px solid var(--gold);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            display: inline-block; margin-right: 10px;
+        }
+
+        footer {
+            padding: 60px 8%; border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: var(--text-dim);
         }
 
         .btn-vault {
-            margin-top: 80px; padding: 20px 60px;
+            margin-top: 60px; padding: 18px 45px;
             border: 1px solid var(--gold); color: var(--gold);
-            text-decoration: none; font-size: 13px; letter-spacing: 4px;
-            transition: 0.5s; display: inline-block;
+            text-decoration: none; font-size: 12px; letter-spacing: 3px;
+            transition: 0.4s;
         }
         .btn-vault:hover { background: var(--gold); color: var(--bg); }
-
-        footer {
-            padding: 80px 8%; border-top: 1px solid rgba(197, 160, 89, 0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 11px; color: var(--text-dim); letter-spacing: 1px;
-        }
-
-        /* 极简柠檬图标逻辑 */
-        .lemon-box {
-            display: flex; align-items: center; justify-content: center;
-            margin-top: 70px; color: var(--text-dim); font-size: 11px; letter-spacing: 2px;
-        }
-        .lemon-icon {
-            width: 20px; height: 20px; border: 1px solid var(--gold);
-            border-radius: 50% 10%; transform: rotate(45deg); margin-right: 15px;
-        }
     </style>
 </head>
 <body>
@@ -148,53 +146,55 @@
     </nav>
 </header>
 
-<main>
-    <section class="hero">
-        <div class="hero-tag">Independent Proxy for Global Families</div>
-        <h1>We Verify. You Decide.</h1>
-        <h2>全球家庭的独立决策代理人</h2>
-        
-        <div class="metrics">
-            <div class="metric-item">
-                <span class="metric-value">10X</span>
-                <span class="metric-label">十倍赔付宣誓</span>
-            </div>
-            <div class="metric-item">
-                <span class="metric-value">0%</span>
-                <span class="metric-label">零返佣利益隔离</span>
-            </div>
-            <div class="metric-item">
-                <span class="metric-value">100%</span>
-                <span class="metric-label">全周期买方代理</span>
-            </div>
+<section class="hero">
+    <div class="hero-tag">Independent Proxy for Global Families</div>
+    <h1>We Verify. You Decide.</h1>
+    <h2>全球家庭的独立决策代理人</h2>
+    
+    <div class="metrics">
+        <div class="metric-item">
+            <span class="metric-value">10X</span>
+            <span class="metric-label">十倍赔付宣誓</span>
         </div>
-
-        <a href="#" class="btn-vault">ENTER THE VAULT / 进入私域保险库</a>
-    </section>
-
-    <section class="red-lines">
-        <span class="line-item">不代理交易项目 / Zero Project Brokerage</span>
-        <span class="line-item">不收受供应商返佣 / Zero Vendor Commissions</span>
-        <span class="line-item">不经手跨境资金 / Zero Fund Handling</span>
-    </section>
-
-    <section id="mandate" class="mandate">
-        <h3>我们的站位：孤独的买方代理</h3>
-        <p>
-            我们拒绝进入任何利益合谋的链路。签署 <b>《全周期决策委任书 (Mandate of Representation)》</b> 即意味着您拥有了锁定风险的最后武器。
-            <br><br>
-            若 GP Partners 被证实在任何环节收受了来自标的项目方的隐形利益，我们将无条件启动 <b>十倍赔付机制</b>。这笔赔付金不仅是对您的补偿，更是我们团队在全球资产丛林中穿行的职业尊严底线。
-        </p>
-
-        <div class="lemon-box">
-            <div class="lemon-icon"></div>
-            THE LEMON LOGIC / 穿透信息不对称
+        <div class="metric-item">
+            <span class="metric-value">0%</span>
+            <span class="metric-label">零返佣利益隔离</span>
         </div>
-    </section>
-</main>
+        <div class="metric-item">
+            <span class="metric-value">100%</span>
+            <span class="metric-label">全周期买方代理</span>
+        </div>
+    </div>
+
+    <a href="#" class="btn-vault">ENTER THE VAULT / 进入私域保险库</a>
+</section>
+
+<section class="red-lines">
+    <span class="line-item">不代理任何交易项目 / Zero Project Brokerage</span>
+    <span style="color:var(--gold)">|</span>
+    <span class="line-item">不收受供应商返佣 / Zero Vendor Commissions</span>
+    <span style="color:var(--gold)">|</span>
+    <span class="line-item">不经手跨境资金 / Zero Fund Handling</span>
+</section>
+
+<section id="mandate" class="mandate">
+    <h3>我们的站位：孤独的买方代理</h3>
+    <p>
+        我们拒绝进入任何利益合谋的链路。签署 <b>《全周期决策委任书 (Mandate of Representation)》</b> 即意味着您拥有了锁定风险的最后武器。
+        <br><br>
+        若 GP Partners 被证实在任何环节收受了来自标的项目方的隐形利益，我们将无条件启动 <b>十倍赔付机制</b>。
+        <br><br>
+        这是我们的契约底线，也是职业尊严。
+    </p>
+
+    <div class="lemon-logic">
+        <div class="lemon-icon"></div>
+        THE LEMON LOGIC / 穿透信息不对称
+    </div>
+</section>
 
 <footer>
-    <div>SECURITY BOND / 权益保障池现值：$154,200.00</div>
+    <div>SECURITY BOND / 权益保障池：$154,200.00</div>
     <div>© GP PARTNERS. LOGIC OVER SALES.</div>
 </footer>
 
