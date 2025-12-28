@@ -3,239 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GP Partners | Logic Over Sales</title>
+    <title>GP Partners | 逻辑高于销售</title>
     <style>
         :root {
-            --bg: #050a0f; /* 极深普鲁士蓝，接近黑色的深邃感 */
-            --gold: #C5A059; /* 磨砂古铜金 */
-            --gold-glow: rgba(197, 160, 89, 0.3);
-            --text-primary: #f2f2f2;
-            --text-secondary: #8e959b;
-            --font-main: 'Inter', 'PingFang SC', -apple-system, sans-serif;
+            /* 严格执行色彩比例：85% 普鲁士蓝 | 10% 雾面金 | 5% 呼吸白  */
+            --bg: #0d151f; 
+            --gold: #A68B5B; 
+            --white: #F2F2F2;
+            --text-dim: #8e959b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--bg);
-            color: var(--text-primary);
-            font-family: var(--font-main);
+            color: var(--white);
+            font-family: "Noto Serif SC", serif; /* 中文母语化质感统一 [cite: 24] */
             overflow-x: hidden;
             line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* 核心：逻辑粒子 Canvas 渲染模拟 */
-        #logic-particles {
+        /* 动态元素：[ The Logic Particles ] 逻辑粒子 [cite: 42, 43] */
+        #particle-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, transparent 80%),
-                radial-gradient(1px 1px at 20px 30px, var(--gold) 100%, transparent),
-                radial-gradient(1px 1px at 40px 70px, var(--gold) 100%, transparent),
-                radial-gradient(1px 1px at 100px 150px, #ffffff 100%, transparent);
-            background-size: 200px 200px;
-            animation: backgroundFlow 60s linear infinite;
+            z-index: -1; pointer-events: none; opacity: 0.4;
         }
 
-        @keyframes backgroundFlow {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
-
-        /* 1. 方碑式加厚 Logo (The Monolith) */
-        header {
-            padding: 60px 8%;
-            display: flex; justify-content: space-between; align-items: flex-start;
-        }
-
-        .logo-container {
-            position: relative;
-            padding: 12px 28px;
-            border: 3px solid var(--gold); /* 加厚边框 */
-        }
-
-        /* 模拟非闭合方框：四个角留白 */
-        .logo-container::before {
-            content: ""; position: absolute; top: -5px; left: 20%; width: 60%; height: 15px; background: var(--bg);
-        }
-        .logo-container::after {
-            content: ""; position: absolute; bottom: -5px; left: 20%; width: 60%; height: 15px; background: var(--bg);
-        }
-
-        .logo-text {
-            font-size: 38px; font-weight: 900; /* 极致厚重 */
-            color: var(--gold); letter-spacing: 4px; line-height: 1;
-            text-shadow: 0 0 15px var(--gold-glow);
-        }
-
-        /* 2. 首屏冲击 (Hero Section) */
-        .hero {
-            height: 90vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 10%;
-        }
-
-        .hero-tag {
-            font-size: 13px; letter-spacing: 8px; color: var(--gold);
-            margin-bottom: 30px; text-transform: uppercase; opacity: 0.8;
-        }
-
-        .hero h1 {
-            font-size: clamp(40px, 8vw, 82px); font-weight: 200; 
-            letter-spacing: 18px; color: #fff; margin-bottom: 20px;
-        }
-
-        .hero h2 {
-            font-size: 20px; font-weight: 300; color: var(--gold);
-            letter-spacing: 8px; margin-bottom: 60px;
-        }
-
-        /* 3. 核心指标：10X / 0% / 100% */
-        .metrics-grid {
-            display: flex; gap: 120px; margin-top: 40px;
-        }
-
-        .metric-card { text-align: center; }
-        .m-value { 
-            font-size: 54px; font-weight: 800; color: var(--gold); 
-            display: block; margin-bottom: 10px;
-        }
-        .m-desc { font-size: 12px; letter-spacing: 3px; color: var(--text-secondary); text-transform: uppercase; }
-
-        /* 4. 业务红线 (The Three Zeros) */
-        .red-line-section {
-            padding: 150px 10%; text-align: center;
-            background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.02), transparent);
-        }
-
-        .line-item {
-            font-size: 24px; font-weight: 200; letter-spacing: 6px;
-            margin: 60px 0; color: var(--text-primary);
-            position: relative; display: inline-block;
-        }
-
-        .line-item::after {
-            content: ""; position: absolute; bottom: -15px; left: 25%; width: 50%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        /* 5. 核心文案：买方顾问立场 (The Stance) */
-        .stance-section {
-            padding: 150px 15%; max-width: 1200px; margin: 0 auto;
-        }
-
-        .section-label {
-            color: var(--gold); font-size: 12px; letter-spacing: 5px; margin-bottom: 40px;
-        }
-
-        .stance-title {
-            font-size: 32px; font-weight: 500; margin-bottom: 50px; letter-spacing: 4px;
-        }
-
-        .stance-p {
-            font-size: 18px; color: #b0b8bf; line-height: 2.4; text-align: justify;
-        }
-
-        .stance-p b { color: var(--text-primary); font-weight: 600; }
-
-        /* 6. 法律基石板块 */
-        .legal-box {
-            margin-top: 80px; padding: 40px;
-            border-left: 1px solid var(--gold);
-            background: rgba(197, 160, 89, 0.03);
-        }
-
-        /* 7. 引导按钮 (The Vault) */
-        .cta-container { margin-top: 100px; text-align: center; }
-        .btn-gold {
-            padding: 22px 60px; border: 1px solid var(--gold);
-            color: var(--gold); text-decoration: none; font-size: 14px;
-            letter-spacing: 4px; transition: all 0.5s ease;
-            background: transparent;
-        }
-        .btn-gold:hover {
-            background: var(--gold); color: var(--bg);
-            box-shadow: 0 0 30px var(--gold-glow);
-        }
-
-        footer {
-            padding: 100px 8% 60px; border-top: 1px solid rgba(197, 160, 89, 0.1);
+        /* 1. 隐藏式背景导航栏 [cite: 2] */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 30px 6%;
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 11px; color: var(--text-secondary); letter-spacing: 2px;
+            z-index: 100; background: transparent;
         }
 
-        /* 响应式适配 */
-        @media (max-width: 900px) {
-            .metrics-grid { flex-direction: column; gap: 50px; }
-            .hero h1 { font-size: 40px; letter-spacing: 8px; }
-            header { flex-direction: column; align-items: center; gap: 30px; }
+        /* 2. 方碑式 Logo：粗体字母 + 细线框架 [cite: 32, 38] */
+        .logo-monolith {
+            position: relative; border: 1px solid var(--gold);
+            padding: 10px 25px; cursor: pointer;
         }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif; /* 英文极细金融感 [cite: 24] */
+            font-size: 32px; font-weight: 800; color: var(--gold);
+            letter-spacing: 2px;
+        }
+        /* Logo 激活：每 4 秒像“心跳”一样闪烁 [cite: 39] */
+        .logo-monolith::before {
+            content: ""; position: absolute; inset: 0;
+            border: 2px solid var(--gold); animation: pulse 4s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.2; } 5% { opacity: 1; } 10% { opacity: 0.2; } 100% { opacity: 0.2; }
+        }
+
+        .nav-links a {
+            color: var(--white); text-decoration: none; margin-left: 30px;
+            font-size: 14px; letter-spacing: 2px;
+        }
+
+        /* 全屏模块化布局 (100vh)  */
+        section {
+            min-height: 100vh; width: 100%; padding: 100px 10%;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
+        /* 首屏 Hero 区 [cite: 56, 57] */
+        .hero { text-align: center; }
+        .logic-tag { color: var(--gold); letter-spacing: 8px; font-size: 14px; margin-bottom: 20px; }
+        .hero h1 { font-size: clamp(40px, 6vw, 80px); font-weight: 200; letter-spacing: 15px; margin-bottom: 30px; }
+        
+        /* 核心对账单逻辑 [cite: 58] */
+        .metrics { display: flex; justify-content: center; gap: 80px; margin-top: 50px; }
+        .m-item { text-align: center; }
+        .m-val { font-size: 48px; font-weight: 700; color: var(--gold); display: block; }
+        .m-label { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; margin-top: 10px; }
+
+        /* 业务红线：三个垂直金属质感色块 [cite: 59, 60] */
+        .red-lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+        .line-box { 
+            border: 1px solid rgba(166, 139, 91, 0.3); padding: 60px 20px;
+            transition: 0.5s;
+        }
+        .line-box:hover { border-color: var(--gold); background: rgba(166, 139, 91, 0.05); }
+
+        /* 研判纪实模块：去人文化处理  */
+        .case-study { background: rgba(0,0,0,0.2); }
+        .memo-card { border-left: 2px solid var(--gold); padding: 30px; margin-bottom: 30px; max-width: 700px; }
+
+        /* 独立性对赌协议区 [cite: 101] */
+        .bond-section { border: 1px solid var(--gold); padding: 60px; position: relative; }
+        .bond-section h3 { color: var(--gold); margin-bottom: 30px; }
+
+        /* 权益保障池动态跳动 [cite: 102] */
+        .security-pool { position: fixed; bottom: 40px; left: 6%; font-size: 12px; color: var(--gold); }
+
+        /* 柠檬过滤器图标模拟 [cite: 26, 28] */
+        .lemon-filter { display: flex; align-items: center; gap: 15px; font-size: 12px; opacity: 0.7; margin-top: 40px; }
+        .lemon-shape { width: 20px; height: 14px; border: 1px solid var(--gold); border-radius: 50% 10%; }
+
+        footer { padding: 60px 6%; border-top: 1px solid rgba(166, 139, 91, 0.1); font-size: 11px; color: var(--text-dim); }
     </style>
 </head>
 <body>
 
-<div id="logic-particles"></div>
+    <canvas id="particle-canvas"></canvas>
 
-<header>
-    <div class="logo-container">
-        <div class="logo-text">GP</div>
-    </div>
-    <div style="font-size: 10px; color: var(--text-secondary); letter-spacing: 3px; text-align: right;">
-        EST. 2024 / INDEPENDENT AUDIT<br>
-        <span style="color: var(--gold);">SECURE ACCESS ONLY</span>
-    </div>
-</header>
+    <nav>
+        <div class="logo-monolith">
+            <span class="logo-text">GP</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">研判范畴</a>
+            <a href="#">我们的立场</a>
+            <a href="#">Risk Memos</a>
+            <a href="#" style="color:var(--gold)">VAULT 入口</a>
+        </div>
+    </nav>
 
-<main>
     <section class="hero">
-        <div class="hero-tag">Logic Over Sales / 逻辑高于销售</div>
+        <div class="logic-tag">LOGIC OVER SALES / 逻辑高于销售 [cite: 7]</div>
         <h1>WE VERIFY.<br>YOU DECIDE.</h1>
-        <h2>全球资产标的底层逻辑审计</h2>
+        <p>全球身份决策的独立判断体系 [cite: 58]</p>
         
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <span class="m-value">10X</span>
-                <span class="m-desc">十倍赔付承诺</span>
-            </div>
-            <div class="metric-card">
-                <span class="m-value">0%</span>
-                <span class="m-desc">零佣金利益隔离</span>
-            </div>
-            <div class="metric-card">
-                <span class="m-value">100%</span>
-                <span class="m-desc">孤独买方代理</span>
+        <div class="metrics">
+            <div class="m-item"><span class="m-val">10X</span><span class="m-label">十倍赔付承诺</span></div>
+            <div class="m-item"><span class="m-val">0%</span><span class="m-label">零佣金隔离</span></div>
+            <div class="m-item"><span class="m-val">100%</span><span class="m-label">买方代理站位</span></div>
+        </div>
+    </section>
+
+    <section class="red-lines">
+        <div class="line-box"><h3>拒绝利益合谋</h3><p>不代理交易项目</p></div>
+        <div class="line-box"><h3>还原资产身价</h3><p>不收受供应商返佣</p></div>
+        <div class="line-box"><h3>锁定权力边界</h3><p>不经手跨境资金</p></div>
+    </section>
+
+    <section class="case-study">
+        <h2 style="margin-bottom: 50px;">研判纪实 / Risk Memos</h2>
+        <div class="memo-card">
+            <h4>法理维度：POA 权力边界审计 [cite: 74]</h4>
+            <p>针对某 A 类高风险 POA 授权的成功修正与权利锁定。我们不写人物，只还原逻辑。 [cite: 18]</p>
+        </div>
+        <div class="memo-card">
+            <h4>财务维度：包租项目还原模型 [cite: 73]</h4>
+            <p>剥离 15%-25% 的渠道获客成本，还原资产在本地市场的真实残值。 [cite: 69]</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="bond-section">
+            <h3>独立性不是一句口号，它是品牌存续的物理基石。</h3>
+            <p>我们将对“零佣金”的承诺直接写入《服务约定》的违约条款：若本机构被证实在任何环节收受了来自标的项目方的隐形利益，我们将启动<b>十倍赔付机制</b>。 [cite: 101]</p>
+            <p style="margin-top: 20px; color: var(--gold);">这不仅是为您提供的安全边界，更是我们团队在全球资产丛林中穿行的尊严底线。 [cite: 101]</p>
+            
+            <div class="lemon-filter">
+                <div class="lemon-shape"></div>
+                LEMON FILTER / 致力于为您过滤每一颗可能影响资产安全的“柠檬”。 [cite: 28, 70]
             </div>
         </div>
     </section>
 
-    <section class="red-line-section">
-        <div class="line-item">不代理任何交易项目 / Zero Project Brokerage</div>
-        <div class="line-item">不收受供应商返佣 / Zero Vendor Commissions</div>
-        <div class="line-item">不经手跨境资金 / Zero Fund Handling</div>
-    </section>
+    <div class="security-pool">
+        SECURITY BOND / 权益保障池现值：$154,200.00 (实时跳动) [cite: 102]
+    </div>
 
-    <section class="stance-section">
-        <div class="section-label">THE MANDATE</div>
-        <h3 class="stance-title">我们的唯一效忠对象即为客户</h3>
-        <div class="stance-p">
-            <p>
-                既然我们定义为<b>“买方顾问”</b>，我们的唯一效忠对象即为客户。GP Partners 彻底切断与全球开发商、基金方及中介机构的所有利益链条。我们不接受佣金，是为了确保在面临风险偏好冲突时，我们有底气站在您的身前。
-            </p>
-            <div class="legal-box">
-                这是我们品牌最沉重的基石：若任何客户查实 GP Partners 曾收受标的项目方的隐形佣金，我们将启动<b>十倍赔付流程</b>。这不是口号，而是写进我们<b>《全周期决策委任书 (Mandate of Representation)》</b>的法律条款。
-            </div>
-        </div>
+    <footer>
+        <p>Global Intelligence: Europe | Caribbean | Asia | North America [cite: 107]</p>
+        <p style="margin-top: 10px;">© GP PARTNERS. PRIVATE CONSULTANCY. ONLY NECESSARY COOKIES USED. [cite: 55, 112]</p>
+    </footer>
 
-        <div class="cta-container">
-            <a href="#" class="btn-gold">ENTER THE VAULT / 进入私域保险库</a>
-        </div>
-    </section>
-</main>
+    <script>
+        // 逻辑粒子模拟背景 [cite: 42, 45]
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-<footer>
-    <div>SECURITY BOND / 权益保障池：$154,200.00</div>
-    <div>PRIVATE CONSULTANCY. NOT A PUBLIC OFFERING.</div>
-</footer>
+        let particles = [];
+        for(let i=0; i<50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2
+            });
+        }
 
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = '#A68B5B';
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1, 0, Math.PI*2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
 </body>
 </html>
