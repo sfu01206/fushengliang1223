@@ -1,35 +1,184 @@
-<section class="hero-section">
-    <div class="scanning-line"></div>
-    
-    <div class="content-wrapper">
-        <nav class="top-nav">
-            <span class="logo">GP PARTNERS</span>
-            <div class="lang-switch">CN / EN</div>
-        </nav>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP Partners | Independent Decision Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&family=Noto+Serif+SC:wght@200;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d151f; /* 普鲁士蓝 */
+            --accent-color: #C5A059; /* 古铜金 */
+            --text-main: #d1d5db;
+            --text-bright: #ffffff;
+        }
 
-        <div class="manifesto">
-            <p class="subtitle">Independent Buy-Side Advisor</p>
-            <h1>We Verify. You Decide.</h1>
-            <h2>全球身份决策的独立判断体系</h2>
-            
-            <div class="three-zeros">
-                <span>不代理任何交易项目</span>
-                <span class="divider">|</span>
-                <span>不收受供应商返佣</span>
-                <span class="divider">|</span>
-                <span>不经手跨境资金</span>
-            </div>
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            font-family: 'Montserrat', 'Noto Serif SC', serif;
+            color: var(--text-main);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        /* 4秒金色扫描线 */
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { top: 110%; opacity: 0; }
+        }
+        .scanner {
+            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            box-shadow: 0 0 15px var(--accent-color);
+            z-index: 9999; pointer-events: none;
+            animation: scan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        header {
+            padding: 40px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo {
+            font-size: 18px; letter-spacing: 5px; color: var(--text-bright);
+            font-weight: 200; border: 1px solid var(--accent-color);
+            padding: 5px 15px;
+        }
+
+        nav a {
+            color: var(--text-main); text-decoration: none;
+            margin-left: 30px; font-size: 11px; letter-spacing: 2px;
+            text-transform: uppercase; transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-color); }
+
+        .hero {
+            height: 85vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 52px; font-weight: 200; color: var(--text-bright);
+            letter-spacing: 10px; margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 18px; font-weight: 300; color: var(--accent-color);
+            letter-spacing: 6px; margin-bottom: 50px;
+        }
+
+        .three-zeros {
+            display: flex; gap: 40px; font-size: 14px;
+            letter-spacing: 2px; color: var(--text-main);
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            padding-top: 30px;
+        }
+
+        /* 风险备忘录 - 律所感模块 */
+        .memos {
+            padding: 100px 10%;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .section-title {
+            font-size: 12px; color: var(--accent-color);
+            letter-spacing: 4px; text-transform: uppercase;
+            margin-bottom: 50px; display: block;
+        }
+
+        .memo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+        }
+
+        .memo-card {
+            border-left: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 20px 30px; transition: 0.4s;
+        }
+
+        .memo-card:hover { border-left: 1px solid var(--accent-color); background: rgba(197, 160, 89, 0.05); }
+
+        .memo-card h3 { font-size: 16px; color: var(--text-bright); margin-bottom: 15px; }
+        .memo-card p { font-size: 13px; line-height: 1.6; color: #888; }
+
+        footer {
+            padding: 60px 10%; border-top: 1px solid rgba(197, 160, 89, 0.1);
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+
+        .lemon-icon {
+            width: 20px; opacity: 0.5; transition: 0.3s; cursor: pointer;
+        }
+        .lemon-icon:hover { opacity: 1; }
+
+        .security-bond {
+            font-size: 11px; color: var(--accent-color); letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanner"></div>
+
+<header>
+    <div class="logo">GP PARTNERS</div>
+    <nav>
+        <a href="#">Our Position / 立场</a>
+        <a href="#">Risk Memos / 备忘录</a>
+        <a href="#">Solutions / 路径</a>
+        <a href="#" style="color: var(--accent-color);">The Vault / 保险库</a>
+    </nav>
+</header>
+
+<main class="hero">
+    <p style="font-size: 10px; letter-spacing: 5px; margin-bottom: 20px;">INDEPENDENT BUY-SIDE ADVISOR</p>
+    <h1>We Verify. You Decide.</h1>
+    <h2>全球身份决策的独立判断体系</h2>
+    
+    <div class="three-zeros">
+        <span>不代理交易项目</span>
+        <span>不收受供应商返佣</span>
+        <span>不经手跨境资金</span>
+    </div>
+
+    <div style="margin-top: 60px;">
+        <a href="#" style="text-decoration: none; color: var(--accent-color); font-size: 12px; border: 1px solid var(--accent-color); padding: 15px 40px; letter-spacing: 2px;">ENTER PRIVATE VAULT / 进入私域保险库</a>
+    </div>
+</main>
+
+<section class="memos">
+    <span class="section-title">Risk Memos / 风险研判备忘录</span>
+    <div class="memo-grid">
+        <div class="memo-card">
+            <h3>财务还原模型</h3>
+            <p>剥离包租、回购等金融包装，还原资产在本地市场的真实身价与资产残值。</p>
+        </div>
+        <div class="memo-card">
+            <h3>POA 权力审计</h3>
+            <p>解构授权委托书的权力边界，防止资产处置权灭失，锁定身份申请的稳定性。</p>
+        </div>
+        <div class="memo-card">
+            <h3>柠檬逻辑专栏</h3>
+            <p>穿透信息不对称，识别跨境路径中伪装成优品的次品资产（Lemons）。</p>
         </div>
     </div>
 </section>
 
-<section class="lemon-logic">
-    <div class="lemon-icon">
-        <svg></svg>
+<footer>
+    <div class="security-bond">
+        Security Bond / 客户权益保障池: $154,200.00 (实时监控)
     </div>
-    <h3>The Lemon Logic / 柠檬逻辑</h3>
-    <p>
-        在信息不对称的市场中，由于逆向选择，次品资产（Lemons）往往驱逐优质资产。<br>
-        GP Partners 的使命是作为您的“逻辑过滤器”，剥离包装，直视内核。
-    </p>
-</section>
+    
+    <div>
+        <svg class="lemon-icon" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1">
+            <path d="M7.21 15c2.18 0 4-1.79 4-4 0-2.21-1.82-4-4-4s-4 1.79-4 4c0 2.21 1.82 4 4 4z"></path>
+            <path d="M11.21 11c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4-4-1.79-4-4z"></path>
+        </svg>
+        <p style="font-size: 10px; margin-top: 10px;">© GP PARTNERS. LOGIC OVER SALES.</p>
+    </div>
+</footer>
+
+</body>
+</html>
