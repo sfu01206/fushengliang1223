@@ -1,207 +1,319 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GP Partners | 逻辑高于销售</title>
-    <style>
-        :root {
-            /* 严格执行色彩比例：85% 普鲁士蓝 | 10% 雾面金 | 5% 呼吸白  */
-            --bg: #0d151f; 
-            --gold: #A68B5B; 
-            --white: #F2F2F2;
-            --text-dim: #8e959b;
-        }
+  <meta charset="UTF-8" />
+  <title>GP Partners | Independent Decision Advisory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--bg);
-            color: var(--white);
-            font-family: "Noto Serif SC", serif; /* 中文母语化质感统一 [cite: 24] */
-            overflow-x: hidden;
-            line-height: 1.8;
-        }
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: #0d151f;
+      color: #f2f2f2;
+      line-height: 1.7;
+    }
 
-        /* 动态元素：[ The Logic Particles ] 逻辑粒子 [cite: 42, 43] */
-        #particle-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; opacity: 0.4;
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      border-bottom: 1px solid #1f2a38;
+    }
 
-        /* 1. 隐藏式背景导航栏 [cite: 2] */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 30px 6%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; background: transparent;
-        }
+    .logo {
+      font-size: 18px;
+      font-weight: 600;
+      color: #c9b27d;
+      letter-spacing: 0.5px;
+    }
 
-        /* 2. 方碑式 Logo：粗体字母 + 细线框架 [cite: 32, 38] */
-        .logo-monolith {
-            position: relative; border: 1px solid var(--gold);
-            padding: 10px 25px; cursor: pointer;
-        }
-        .logo-text {
-            font-family: 'Montserrat', sans-serif; /* 英文极细金融感 [cite: 24] */
-            font-size: 32px; font-weight: 800; color: var(--gold);
-            letter-spacing: 2px;
-        }
-        /* Logo 激活：每 4 秒像“心跳”一样闪烁 [cite: 39] */
-        .logo-monolith::before {
-            content: ""; position: absolute; inset: 0;
-            border: 2px solid var(--gold); animation: pulse 4s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.2; } 5% { opacity: 1; } 10% { opacity: 0.2; } 100% { opacity: 0.2; }
-        }
+    nav a {
+      margin: 0 14px;
+      color: #cfd6df;
+      text-decoration: none;
+      font-size: 14px;
+    }
 
-        .nav-links a {
-            color: var(--white); text-decoration: none; margin-left: 30px;
-            font-size: 14px; letter-spacing: 2px;
-        }
+    nav a:hover {
+      color: #ffffff;
+    }
 
-        /* 全屏模块化布局 (100vh)  */
-        section {
-            min-height: 100vh; width: 100%; padding: 100px 10%;
-            display: flex; flex-direction: column; justify-content: center;
-        }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid #2a3545;
+      color: #cfd6df;
+      margin-left: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
 
-        /* 首屏 Hero 区 [cite: 56, 57] */
-        .hero { text-align: center; }
-        .logic-tag { color: var(--gold); letter-spacing: 8px; font-size: 14px; margin-bottom: 20px; }
-        .hero h1 { font-size: clamp(40px, 6vw, 80px); font-weight: 200; letter-spacing: 15px; margin-bottom: 30px; }
-        
-        /* 核心对账单逻辑 [cite: 58] */
-        .metrics { display: flex; justify-content: center; gap: 80px; margin-top: 50px; }
-        .m-item { text-align: center; }
-        .m-val { font-size: 48px; font-weight: 700; color: var(--gold); display: block; }
-        .m-label { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; margin-top: 10px; }
+    .lang-switch button:hover {
+      border-color: #c9b27d;
+      color: #c9b27d;
+    }
 
-        /* 业务红线：三个垂直金属质感色块 [cite: 59, 60] */
-        .red-lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
-        .line-box { 
-            border: 1px solid rgba(166, 139, 91, 0.3); padding: 60px 20px;
-            transition: 0.5s;
-        }
-        .line-box:hover { border-color: var(--gold); background: rgba(166, 139, 91, 0.05); }
+    main {
+      min-height: 80vh;
+    }
 
-        /* 研判纪实模块：去人文化处理  */
-        .case-study { background: rgba(0,0,0,0.2); }
-        .memo-card { border-left: 2px solid var(--gold); padding: 30px; margin-bottom: 30px; max-width: 700px; }
+    section.page {
+      display: none;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 32px;
+    }
 
-        /* 独立性对赌协议区 [cite: 101] */
-        .bond-section { border: 1px solid var(--gold); padding: 60px; position: relative; }
-        .bond-section h3 { color: var(--gold); margin-bottom: 30px; }
+    section.page.active {
+      display: block;
+    }
 
-        /* 权益保障池动态跳动 [cite: 102] */
-        .security-pool { position: fixed; bottom: 40px; left: 6%; font-size: 12px; color: var(--gold); }
+    h1 {
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
 
-        /* 柠檬过滤器图标模拟 [cite: 26, 28] */
-        .lemon-filter { display: flex; align-items: center; gap: 15px; font-size: 12px; opacity: 0.7; margin-top: 40px; }
-        .lemon-shape { width: 20px; height: 14px; border: 1px solid var(--gold); border-radius: 50% 10%; }
+    h2 {
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
 
-        footer { padding: 60px 6%; border-top: 1px solid rgba(166, 139, 91, 0.1); font-size: 11px; color: var(--text-dim); }
-    </style>
+    h3 {
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      color: #c9b27d;
+      margin-bottom: 32px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #d7dde5;
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      margin-top: 48px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-right: 20px;
+      padding: 10px 20px;
+      border: 1px solid #c9b27d;
+      color: #c9b27d;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .cta a.secondary {
+      border-color: #2a3545;
+      color: #cfd6df;
+    }
+
+    .list li {
+      margin-bottom: 10px;
+    }
+
+    .steps li {
+      margin-bottom: 14px;
+    }
+
+    .note {
+      margin-top: 32px;
+      font-style: italic;
+      color: #b9c0c8;
+    }
+
+    .faq {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 32px;
+      border-top: 1px solid #1f2a38;
+    }
+
+    details {
+      margin-bottom: 14px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    footer {
+      padding: 40px 32px;
+      border-top: 1px solid #1f2a38;
+      text-align: center;
+      font-size: 12px;
+      color: #8a94a3;
+    }
+
+    footer a {
+      color: #8a94a3;
+      margin: 0 6px;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
 
-    <canvas id="particle-canvas"></canvas>
+<header>
+  <div class="logo">GP Partners</div>
 
-    <nav>
-        <div class="logo-monolith">
-            <span class="logo-text">GP</span>
-        </div>
-        <div class="nav-links">
-            <a href="#">研判范畴</a>
-            <a href="#">我们的立场</a>
-            <a href="#">Risk Memos</a>
-            <a href="#" style="color:var(--gold)">VAULT 入口</a>
-        </div>
-    </nav>
+  <nav>
+    <a href="#" data-page="home">Home</a>
+    <a href="#" data-page="services">Services</a>
+    <a href="#" data-page="process">Process</a>
+    <a href="#" data-page="about">About</a>
+    <a href="#" data-page="contact">Contact</a>
+  </nav>
 
-    <section class="hero">
-        <div class="logic-tag">LOGIC OVER SALES / 逻辑高于销售 [cite: 7]</div>
-        <h1>WE VERIFY.<br>YOU DECIDE.</h1>
-        <p>全球身份决策的独立判断体系 [cite: 58]</p>
-        
-        <div class="metrics">
-            <div class="m-item"><span class="m-val">10X</span><span class="m-label">十倍赔付承诺</span></div>
-            <div class="m-item"><span class="m-val">0%</span><span class="m-label">零佣金隔离</span></div>
-            <div class="m-item"><span class="m-val">100%</span><span class="m-label">买方代理站位</span></div>
-        </div>
-    </section>
+  <div class="lang-switch">
+    <button onclick="setLang('cn')">CN</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('hk')">HK</button>
+  </div>
+</header>
 
-    <section class="red-lines">
-        <div class="line-box"><h3>拒绝利益合谋</h3><p>不代理交易项目</p></div>
-        <div class="line-box"><h3>还原资产身价</h3><p>不收受供应商返佣</p></div>
-        <div class="line-box"><h3>锁定权力边界</h3><p>不经手跨境资金</p></div>
-    </section>
+<main>
 
-    <section class="case-study">
-        <h2 style="margin-bottom: 50px;">研判纪实 / Risk Memos</h2>
-        <div class="memo-card">
-            <h4>法理维度：POA 权力边界审计 [cite: 74]</h4>
-            <p>针对某 A 类高风险 POA 授权的成功修正与权利锁定。我们不写人物，只还原逻辑。 [cite: 18]</p>
-        </div>
-        <div class="memo-card">
-            <h4>财务维度：包租项目还原模型 [cite: 73]</h4>
-            <p>剥离 15%-25% 的渠道获客成本，还原资产在本地市场的真实残值。 [cite: 69]</p>
-        </div>
-    </section>
+<section id="home" class="page active">
+  <h1 data-lang="cn">在复杂、不透明的身份决策中<br>我们帮助你把最坏的情况想清楚</h1>
+  <h1 data-lang="en">In complex and opaque identity decisions,<br>we help you think through the worst case.</h1>
+  <h1 data-lang="hk">在複雜而不透明的身份決策中<br>我們協助你先把最壞的情況想清楚</h1>
 
-    <section>
-        <div class="bond-section">
-            <h3>独立性不是一句口号，它是品牌存续的物理基石。</h3>
-            <p>我们将对“零佣金”的承诺直接写入《服务约定》的违约条款：若本机构被证实在任何环节收受了来自标的项目方的隐形利益，我们将启动<b>十倍赔付机制</b>。 [cite: 101]</p>
-            <p style="margin-top: 20px; color: var(--gold);">这不仅是为您提供的安全边界，更是我们团队在全球资产丛林中穿行的尊严底线。 [cite: 101]</p>
-            
-            <div class="lemon-filter">
-                <div class="lemon-shape"></div>
-                LEMON FILTER / 致力于为您过滤每一颗可能影响资产安全的“柠檬”。 [cite: 28, 70]
-            </div>
-        </div>
-    </section>
+  <h3>Independent Decision Advisory</h3>
 
-    <div class="security-pool">
-        SECURITY BOND / 权益保障池现值：$154,200.00 (实时跳动) [cite: 102]
-    </div>
+  <p data-lang="cn">
+    当决策涉及身份、家庭、资产与长期边界时，<br>
+    速度并不能带来安全，清晰才可以。<br><br>
+    GP Partners 是一家独立咨询机构。<br>
+    我们不提供项目、不代理申请、不参与交易。<br>
+    我们的职责，是在你做出不可逆决定之前，<br>
+    协助你把事情真正想清楚。
+  </p>
 
-    <footer>
-        <p>Global Intelligence: Europe | Caribbean | Asia | North America [cite: 107]</p>
-        <p style="margin-top: 10px;">© GP PARTNERS. PRIVATE CONSULTANCY. ONLY NECESSARY COOKIES USED. [cite: 55, 112]</p>
-    </footer>
+  <p data-lang="en">
+    When decisions involve identity, family, assets and long-term consequences,
+    speed does not create security — clarity does.<br><br>
+    GP Partners is an independent advisory firm.
+    We do not sell projects or participate in transactions.
+    Our role is to help you understand your decision
+    before it becomes irreversible.
+  </p>
 
-    <script>
-        // 逻辑粒子模拟背景 [cite: 42, 45]
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+  <p data-lang="hk">
+    當決策涉及身份、家庭、資產與長期影響時，
+    速度並不等於安全，清晰才是。<br><br>
+    GP Partners 是一間獨立諮詢機構。
+    我們不推銷項目、不代理申請、不參與交易。
+    我們的角色，是在你作出不可逆決定之前，
+    協助你真正理解你正在選擇的是什麼。
+  </p>
 
-        let particles = [];
-        for(let i=0; i<50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.2,
-                vy: (Math.random() - 0.5) * 0.2
-            });
-        }
+  <div class="cta">
+    <a href="#" data-page="contact">预约咨询</a>
+    <a href="#" class="secondary" data-page="services">了解我们的服务方式</a>
+  </div>
+</section>
 
-        function draw() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = '#A68B5B';
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1, 0, Math.PI*2);
-                ctx.fill();
-            });
-            requestAnimationFrame(draw);
-        }
-        draw();
-    </script>
+<section id="services" class="page">
+  <h2>我们的服务方式</h2>
+  <p>
+    我们不告诉你“选哪个项目”，<br>
+    我们协助你理解每个选择背后的代价、边界与不可逆后果。
+  </p>
+  <ul class="list">
+    <li>独立立场，不接受任何项目方利益</li>
+    <li>不参与交易，只对判断质量负责</li>
+    <li>服务对象为高净值个人与家庭</li>
+    <li>聚焦身份、资产与长期结构安全</li>
+  </ul>
+</section>
+
+<section id="process" class="page">
+  <h2>咨询流程</h2>
+  <ol class="steps">
+    <li>初步沟通：明确决策背景与真实诉求</li>
+    <li>信息整理：梳理现有选项与假设</li>
+    <li>结构分析：识别关键不确定性</li>
+    <li>判断输出：形成清晰决策视角</li>
+    <li>必要支持：后续跟进与复盘</li>
+  </ol>
+  <p class="note">
+    我们不会替你做决定，<br>
+    但会确保你是在充分理解后果的前提下作出选择。
+  </p>
+</section>
+
+<section id="about" class="page">
+  <h2>关于我们</h2>
+  <p>
+    GP Partners 是一家专注于跨境身份与长期结构决策的独立咨询机构。<br><br>
+    团队背景涵盖跨境法律、合规、金融与宏观研究。<br>
+    我们不追求规模扩张，也不参与项目竞争。<br><br>
+    我们存在的意义，是为复杂系统中的个人与家庭，
+    提供一个不被利益裹挟的判断坐标系。
+  </p>
+</section>
+
+<section id="contact" class="page">
+  <h2>预约咨询</h2>
+  <p>
+    如果你正面临重要身份或长期结构性决策，<br>
+    并希望在决定前获得独立判断视角，<br>
+    欢迎联系我们。
+  </p>
+  <p>
+    📧 contact@globalpioneerpartners.com<br>
+    🌐 www.globalpioneerpartners.com
+  </p>
+</section>
+
+<section class="faq">
+  <h2>常见问题</h2>
+  <details><summary>你们是否推荐具体项目？</summary><p>不会，我们不参与项目推荐。</p></details>
+  <details><summary>是否与中介或政府合作？</summary><p>不接受任何形式的利益合作。</p></details>
+  <details><summary>咨询是否给出结论？</summary><p>我们提供清晰判断视角，而非标准答案。</p></details>
+</section>
+
+</main>
+
+<footer>
+  © GP Partners ｜ 
+  <a href="#">Terms of Engagement</a> ·
+  <a href="#">Privacy Policy</a> ·
+  <a href="#">Cookie Policy</a>
+</footer>
+
+<script>
+  let currentLang = 'cn';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+    });
+  }
+
+  setLang('cn');
+
+  document.querySelectorAll('[data-page]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const page = link.dataset.page;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+      window.scrollTo(0, 0);
+    });
+  });
+</script>
+
 </body>
 </html>
