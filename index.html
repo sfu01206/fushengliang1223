@@ -1,319 +1,244 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>GP Partners | Independent Decision Advisory</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>GP Partners | Independent Decision Advisory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-      background: #0d151f;
-      color: #f2f2f2;
-      line-height: 1.7;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: #1f2933;
+    background-color: #f9fafb;
+    line-height: 1.7;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 48px;
-      border-bottom: 1px solid #1f2a38;
-    }
+section {
+    padding: 80px 10%;
+}
 
-    .logo {
-      font-size: 18px;
-      font-weight: 600;
-      color: #c9b27d;
-      letter-spacing: 0.5px;
-    }
+h1, h2, h3 {
+    margin: 0 0 20px;
+    font-weight: 600;
+}
 
-    nav a {
-      margin: 0 14px;
-      color: #cfd6df;
-      text-decoration: none;
-      font-size: 14px;
-    }
+h1 { font-size: 40px; }
+h2 { font-size: 28px; }
+h3 { font-size: 20px; }
 
-    nav a:hover {
-      color: #ffffff;
-    }
+p {
+    max-width: 760px;
+    font-size: 16px;
+    color: #4b5563;
+}
 
-    .lang-switch button {
-      background: transparent;
-      border: 1px solid #2a3545;
-      color: #cfd6df;
-      margin-left: 6px;
-      padding: 4px 8px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+.hero {
+    background: linear-gradient(120deg, #0f172a, #1e293b);
+    color: #ffffff;
+}
 
-    .lang-switch button:hover {
-      border-color: #c9b27d;
-      color: #c9b27d;
-    }
+.hero p {
+    color: #d1d5db;
+}
 
-    main {
-      min-height: 80vh;
-    }
+.hero .subtitle {
+    font-size: 14px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-bottom: 12px;
+}
 
-    section.page {
-      display: none;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 96px 32px;
-    }
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+}
 
-    section.page.active {
-      display: block;
-    }
+.alt {
+    background-color: #ffffff;
+}
 
-    h1 {
-      font-size: 40px;
-      font-weight: 500;
-      margin-bottom: 24px;
-    }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
 
-    h2 {
-      font-size: 32px;
-      font-weight: 500;
-      margin-bottom: 32px;
-    }
+.card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
 
-    h3 {
-      font-size: 14px;
-      letter-spacing: 1.2px;
-      color: #c9b27d;
-      margin-bottom: 32px;
-    }
+.case-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 
-    p {
-      font-size: 16px;
-      color: #d7dde5;
-      margin-bottom: 20px;
-    }
+.footer {
+    background: #0f172a;
+    color: #9ca3af;
+    padding: 50px 10%;
+    font-size: 14px;
+}
 
-    .cta {
-      margin-top: 48px;
-    }
-
-    .cta a {
-      display: inline-block;
-      margin-right: 20px;
-      padding: 10px 20px;
-      border: 1px solid #c9b27d;
-      color: #c9b27d;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .cta a.secondary {
-      border-color: #2a3545;
-      color: #cfd6df;
-    }
-
-    .list li {
-      margin-bottom: 10px;
-    }
-
-    .steps li {
-      margin-bottom: 14px;
-    }
-
-    .note {
-      margin-top: 32px;
-      font-style: italic;
-      color: #b9c0c8;
-    }
-
-    .faq {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 64px 32px;
-      border-top: 1px solid #1f2a38;
-    }
-
-    details {
-      margin-bottom: 14px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 500;
-      color: #ffffff;
-    }
-
-    footer {
-      padding: 40px 32px;
-      border-top: 1px solid #1f2a38;
-      text-align: center;
-      font-size: 12px;
-      color: #8a94a3;
-    }
-
-    footer a {
-      color: #8a94a3;
-      margin: 0 6px;
-      text-decoration: none;
-    }
-  </style>
+.footer a {
+    color: #9ca3af;
+    text-decoration: none;
+    margin-right: 20px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">GP Partners</div>
-
-  <nav>
-    <a href="#" data-page="home">Home</a>
-    <a href="#" data-page="services">Services</a>
-    <a href="#" data-page="process">Process</a>
-    <a href="#" data-page="about">About</a>
-    <a href="#" data-page="contact">Contact</a>
-  </nav>
-
-  <div class="lang-switch">
-    <button onclick="setLang('cn')">CN</button>
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('hk')">HK</button>
-  </div>
-</header>
-
-<main>
-
-<section id="home" class="page active">
-  <h1 data-lang="cn">在复杂、不透明的身份决策中<br>我们帮助你把最坏的情况想清楚</h1>
-  <h1 data-lang="en">In complex and opaque identity decisions,<br>we help you think through the worst case.</h1>
-  <h1 data-lang="hk">在複雜而不透明的身份決策中<br>我們協助你先把最壞的情況想清楚</h1>
-
-  <h3>Independent Decision Advisory</h3>
-
-  <p data-lang="cn">
-    当决策涉及身份、家庭、资产与长期边界时，<br>
-    速度并不能带来安全，清晰才可以。<br><br>
-    GP Partners 是一家独立咨询机构。<br>
-    我们不提供项目、不代理申请、不参与交易。<br>
-    我们的职责，是在你做出不可逆决定之前，<br>
-    协助你把事情真正想清楚。
-  </p>
-
-  <p data-lang="en">
-    When decisions involve identity, family, assets and long-term consequences,
-    speed does not create security — clarity does.<br><br>
-    GP Partners is an independent advisory firm.
-    We do not sell projects or participate in transactions.
-    Our role is to help you understand your decision
-    before it becomes irreversible.
-  </p>
-
-  <p data-lang="hk">
-    當決策涉及身份、家庭、資產與長期影響時，
-    速度並不等於安全，清晰才是。<br><br>
-    GP Partners 是一間獨立諮詢機構。
-    我們不推銷項目、不代理申請、不參與交易。
-    我們的角色，是在你作出不可逆決定之前，
-    協助你真正理解你正在選擇的是什麼。
-  </p>
-
-  <div class="cta">
-    <a href="#" data-page="contact">预约咨询</a>
-    <a href="#" class="secondary" data-page="services">了解我们的服务方式</a>
-  </div>
+<!-- Hero -->
+<section class="hero">
+    <div class="subtitle">Independent Decision Advisory</div>
+    <h1>我们不卖移民项目，<br>只站在你这一边，帮你把决定拆解清楚。</h1>
+    <p>
+        市场上有成千上万家机构在向你推项目。<br>
+        但在你真正做出这个决定之前，<strong>你是否清楚它的真实收益、风险边界，以及你要为它承担什么？</strong>
+    </p>
+    <a href="#consult" class="button">预约一次独立咨询</a>
 </section>
 
-<section id="services" class="page">
-  <h2>我们的服务方式</h2>
-  <p>
-    我们不告诉你“选哪个项目”，<br>
-    我们协助你理解每个选择背后的代价、边界与不可逆后果。
-  </p>
-  <ul class="list">
-    <li>独立立场，不接受任何项目方利益</li>
-    <li>不参与交易，只对判断质量负责</li>
-    <li>服务对象为高净值个人与家庭</li>
-    <li>聚焦身份、资产与长期结构安全</li>
-  </ul>
+<!-- Problem -->
+<section>
+    <h2>为什么这个决定，越来越难做？</h2>
+    <p>
+        信息从未如此透明，但判断从未如此稀缺。<br>
+        官方说法、自媒体解读、机构建议往往彼此矛盾，而真正重要的风险、限制和退出成本，常常被忽略。
+    </p>
 </section>
 
-<section id="process" class="page">
-  <h2>咨询流程</h2>
-  <ol class="steps">
-    <li>初步沟通：明确决策背景与真实诉求</li>
-    <li>信息整理：梳理现有选项与假设</li>
-    <li>结构分析：识别关键不确定性</li>
-    <li>判断输出：形成清晰决策视角</li>
-    <li>必要支持：后续跟进与复盘</li>
-  </ol>
-  <p class="note">
-    我们不会替你做决定，<br>
-    但会确保你是在充分理解后果的前提下作出选择。
-  </p>
+<!-- Who we are -->
+<section class="alt">
+    <h2>GP Partners 是谁？</h2>
+    <p>
+        我们是一家<strong>独立的身份与跨境决策顾问机构</strong>。<br>
+        我们不代理项目、不收取销售佣金，也不以成交为目标。
+    </p>
+
+    <div class="grid">
+        <div class="card">
+            <h3>我们不做什么</h3>
+            <p>
+                不卖移民项目<br>
+                不替机构背书<br>
+                不承诺结果
+            </p>
+        </div>
+        <div class="card">
+            <h3>我们只对一件事负责</h3>
+            <p>
+                帮你把决定的逻辑、代价与后果，在你签字之前拆解清楚。
+            </p>
+        </div>
+    </div>
 </section>
 
-<section id="about" class="page">
-  <h2>关于我们</h2>
-  <p>
-    GP Partners 是一家专注于跨境身份与长期结构决策的独立咨询机构。<br><br>
-    团队背景涵盖跨境法律、合规、金融与宏观研究。<br>
-    我们不追求规模扩张，也不参与项目竞争。<br><br>
-    我们存在的意义，是为复杂系统中的个人与家庭，
-    提供一个不被利益裹挟的判断坐标系。
-  </p>
+<!-- Method -->
+<section>
+    <h2>我们如何帮你把决定做好？</h2>
+    <p>
+        每一次咨询，我们都会从同一套判断结构出发，而不是项目立场。
+    </p>
+
+    <div class="grid">
+        <div class="card">
+            <h3>正向确认</h3>
+            <p>你真正能从这个身份中获得什么，而不是宣传里承诺的是什么。</p>
+        </div>
+        <div class="card">
+            <h3>风险拆解</h3>
+            <p>法律、税务、资产流动性与政策不确定性。</p>
+        </div>
+        <div class="card">
+            <h3>决策建议</h3>
+            <p>是否值得做，以及在什么前提下做。</p>
+        </div>
+    </div>
 </section>
 
-<section id="contact" class="page">
-  <h2>预约咨询</h2>
-  <p>
-    如果你正面临重要身份或长期结构性决策，<br>
-    并希望在决定前获得独立判断视角，<br>
-    欢迎联系我们。
-  </p>
-  <p>
-    📧 contact@globalpioneerpartners.com<br>
-    🌐 www.globalpioneerpartners.com
-  </p>
+<!-- Cases -->
+<section class="alt">
+    <h2>判断纪要 · 三个真实场景</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="case-title">土耳其护照｜房产路径</div>
+            <p>
+                重点不是“能不能拿护照”，而是三年后的美元退出能力、税务居民身份变化及家庭资产配置影响。
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="case-title">葡萄牙｜基金移民</div>
+            <p>
+                判断核心在于基金清算结构、管理人激励机制以及真实退出案例，而非“官方合规”四个字。
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="case-title">香港｜投资入境</div>
+            <p>
+                我们评估的不是政策门槛，而是身份使用价值与未来税务结构的长期适配度。
+            </p>
+        </div>
+    </div>
 </section>
 
-<section class="faq">
-  <h2>常见问题</h2>
-  <details><summary>你们是否推荐具体项目？</summary><p>不会，我们不参与项目推荐。</p></details>
-  <details><summary>是否与中介或政府合作？</summary><p>不接受任何形式的利益合作。</p></details>
-  <details><summary>咨询是否给出结论？</summary><p>我们提供清晰判断视角，而非标准答案。</p></details>
+<!-- Fit -->
+<section>
+    <h2>我们适合谁？</h2>
+    <p>
+        已经被推着往前走，但不想在关键决策上失去主动权的人。
+    </p>
 </section>
 
-</main>
+<!-- Process -->
+<section class="alt">
+    <h2>咨询流程</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>1. 预约咨询</h3>
+            <p>提交你的基本背景与关注问题。</p>
+        </div>
+        <div class="card">
+            <h3>2. 独立分析</h3>
+            <p>不基于项目，而基于你的个人与家庭结构。</p>
+        </div>
+        <div class="card">
+            <h3>3. 判断结论</h3>
+            <p>给出清晰、可执行的决策建议。</p>
+        </div>
+    </div>
+</section>
 
-<footer>
-  © GP Partners ｜ 
-  <a href="#">Terms of Engagement</a> ·
-  <a href="#">Privacy Policy</a> ·
-  <a href="#">Cookie Policy</a>
+<!-- CTA -->
+<section id="consult">
+    <h2>在你做决定之前，先把判断交给我们。</h2>
+    <a href="#" class="button">预约独立咨询</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 GP Partners. All rights reserved.</p>
+    <p>
+        <a href="#">Terms of Engagement</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+    </p>
 </footer>
-
-<script>
-  let currentLang = 'cn';
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.style.display = el.dataset.lang === lang ? 'block' : 'none';
-    });
-  }
-
-  setLang('cn');
-
-  document.querySelectorAll('[data-page]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const page = link.dataset.page;
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(page).classList.add('active');
-      window.scrollTo(0, 0);
-    });
-  });
-</script>
 
 </body>
 </html>
