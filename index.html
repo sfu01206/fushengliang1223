@@ -1,244 +1,1740 @@
-<!DOCTYPE html>
+<!doctype html>
+<!--
+GP Partners — Single-file GitHub Pages build
+Drop this file as /index.html into a GitHub Pages repo.
+-->
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>GP Partners | Independent Decision Advisory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GP Partners — Independent Decision Advisory</title>
+  <meta name="description" content="GP Partners — Independent Decision Advisory"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%20fill='none'%3E%20%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23F6F2EA'/%3E%20%3Cpath%20d='M22%2014v36'%20stroke='%23141414'%20stroke-width='4.5'%20stroke-linecap='round'/%3E%20%3Cpath%20d='M42%2014v36'%20stroke='%23141414'%20stroke-width='4.5'%20stroke-linecap='round'/%3E%20%3Ccircle%20cx='32'%20cy='32'%20r='3'%20fill='%238A6B3A'/%3E%20%3C/svg%3E">
+  <style>
 
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    color: #1f2933;
-    background-color: #f9fafb;
-    line-height: 1.7;
+/* GP Partners — Quiet Authority UI
+   Design tokens + components
+*/
+:root{
+  --paper: #F6F2EA;
+  --ink: #141414;
+  --slate: #4A4A4A;
+  --muted: #6A6A6A;
+  --line: #E3DDD3;
+  --card: rgba(255,255,255,0.55);
+  --accent: #8A6B3A; /* muted copper */
+  --radius: 14px;
+  --maxw: 720px;
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 72px;
+  --space-8: 96px;
+
+  --h1: 40px;
+  --h2: 24px;
+  --h3: 18px;
+  --body: 18px;
+  --small: 14px;
+
+  --lh-body: 1.7;
+  --lh-head: 1.25;
 }
 
-section {
-    padding: 80px 10%;
+@media (max-width: 767px){
+  :root{
+    --h1: 32px;
+    --h2: 20px;
+    --body: 16px;
+    --small: 13px;
+    --space-7: 56px;
+    --space-8: 72px;
+  }
 }
 
-h1, h2, h3 {
-    margin: 0 0 20px;
-    font-weight: 600;
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Noto Sans SC", sans-serif;
+  color:var(--ink);
+  background: var(--paper);
+  line-height: var(--lh-body);
+  letter-spacing: 0.1px;
 }
 
-h1 { font-size: 40px; }
-h2 { font-size: 28px; }
-h3 { font-size: 20px; }
-
-p {
-    max-width: 760px;
-    font-size: 16px;
-    color: #4b5563;
+/* Subtle “paper” grain without image */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(20,20,20,0.03), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(20,20,20,0.02), transparent 55%),
+    radial-gradient(circle at 40% 85%, rgba(20,20,20,0.02), transparent 60%);
+  opacity:0.7;
 }
 
-.hero {
-    background: linear-gradient(120deg, #0f172a, #1e293b);
-    color: #ffffff;
+a{color:inherit; text-decoration:none;}
+a.underline{text-decoration:underline;}
+a:hover{color:var(--accent);}
+p{margin:0 0 var(--space-4) 0;}
+small{font-size:var(--small); color:var(--muted);}
+
+.container{
+  width:100%;
+  padding: 0 var(--space-6);
+}
+@media (max-width: 767px){
+  .container{padding: 0 var(--space-4);}
 }
 
-.hero p {
-    color: #d1d5db;
+.wrap{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  position:relative;
 }
 
-.hero .subtitle {
-    font-size: 14px;
-    letter-spacing: 1px;
-    opacity: 0.8;
-    margin-bottom: 12px;
+hr{
+  border:0;
+  border-top:1px solid var(--line);
+  margin: var(--space-6) 0;
 }
 
-.button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 14px 28px;
-    background: #2563eb;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
+.kicker{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: var(--space-2);
 }
 
-.alt {
-    background-color: #ffffff;
+h1,h2,h3{
+  margin:0 0 var(--space-3) 0;
+  line-height: var(--lh-head);
+  font-weight: 540;
+}
+h1{font-size: var(--h1); letter-spacing:-0.3px;}
+h2{font-size: var(--h2);}
+h3{font-size: var(--h3); font-weight: 560;}
+
+.lede{
+  font-size: var(--body);
+  color: var(--slate);
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
+.bridge{
+  font-size: var(--small);
+  color: var(--muted);
+  margin-top: var(--space-3);
 }
 
-.card {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter: blur(10px);
+  background: rgba(246,242,234,0.78);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: var(--space-3) 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap: var(--space-2);
+  min-width: 200px;
+}
+.brand img{
+  width: 26px;
+  height: 26px;
+}
+.brand span{
+  font-weight: 620;
+  letter-spacing: 0.2px;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap: var(--space-4);
+}
+.nav a{
+  font-size: 15px;
+  color: var(--slate);
+}
+.nav a.active{
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+.actions{
+  display:flex;
+  align-items:center;
+  gap: var(--space-3);
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(20,20,20,0.12);
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  cursor:pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(20,20,20,0.22);
+}
+.btn:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform:none;
+}
+.btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline: 3px solid rgba(138,107,58,0.35);
+  outline-offset: 2px;
+}
+.btn-primary{
+  background: var(--accent);
+  border-color: transparent;
+  color: #fff;
+}
+.btn-primary:hover{background: #7D5F33;}
+.btn-primary:disabled{background: var(--accent);}
+.btn-ghost{border-color: rgba(20,20,20,0.10); color: var(--slate);}
+
+.mobile-toggle{
+  display:none;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(20,20,20,0.12);
+  background: transparent;
+  cursor:pointer;
+}
+@media (max-width: 920px){
+  .nav{display:none;}
+  .mobile-toggle{display:inline-flex; align-items:center; justify-content:center;}
 }
 
-.case-title {
-    font-weight: 600;
-    margin-bottom: 10px;
+.mobile-panel{
+  display:none;
+  border-top:1px solid var(--line);
+  padding-bottom: 10px;
+}
+.mobile-panel.open{display:block;}
+.mobile-panel a{
+  display:block;
+  padding: 14px 0;
+  color: var(--slate);
+}
+.mobile-panel a.active{color: var(--ink); text-decoration:underline; text-underline-offset:6px;}
+.mobile-panel .cta{padding: 18px 0 6px 0;}
+.mobile-panel .cta small{display:block; margin-top:8px;}
+
+section{
+  padding: var(--space-7) 0;
+}
+.section-tight{padding: var(--space-6) 0;}
+.section-hero{padding: var(--space-8) 0 var(--space-7) 0;}
+
+.statement{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+.statement p{margin:0;}
+.statement .lines{display:grid; gap: 6px; font-size: var(--small); color: var(--slate);}
+.statement .title{font-size: 12px; text-transform:uppercase; letter-spacing:0.14em; color: var(--muted); margin-bottom: 10px;}
+
+.list{
+  display:grid;
+  gap: var(--space-3);
+}
+.item{
+  display:grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--space-4);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(227,221,211,0.8);
+}
+.item:last-child{border-bottom:0;}
+.item .key{
+  font-size: var(--small);
+  color: var(--muted);
+}
+.item .val{
+  color: var(--slate);
 }
 
-.footer {
-    background: #0f172a;
-    color: #9ca3af;
-    padding: 50px 10%;
-    font-size: 14px;
+.cards{
+  display:grid;
+  gap: var(--space-4);
+}
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.card:hover{transform: translateY(-2px); border-color: rgba(20,20,20,0.18);}
+.meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: var(--space-3);
+  margin-bottom: 10px;
+}
+.caseid{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+}
+.tag{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(20,20,20,0.10);
+  color: var(--slate);
+  background: rgba(255,255,255,0.35);
 }
 
-.footer a {
-    color: #9ca3af;
-    text-decoration: none;
-    margin-right: 20px;
+.steps{
+  display:grid;
+  gap: var(--space-4);
 }
-</style>
+.step{
+  display:grid;
+  grid-template-columns: 42px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(227,221,211,0.8);
+}
+.step:last-child{border-bottom:0;}
+.step .num{
+  width: 36px; height:36px;
+  border-radius: 999px;
+  border: 1px solid rgba(20,20,20,0.12);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--slate);
+  font-size: 14px;
+}
+.step .text p{margin:6px 0 0 0; color: var(--slate);}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+}
+.chip{
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(20,20,20,0.12);
+  background: rgba(255,255,255,0.35);
+  color: var(--slate);
+  cursor:pointer;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+.chip:hover{transform: translateY(-1px); border-color: rgba(20,20,20,0.20);}
+.chip.active{
+  border-color: rgba(138,107,58,0.55);
+  box-shadow: 0 0 0 3px rgba(138,107,58,0.18);
+}
+
+.form{
+  display:grid;
+  gap: var(--space-4);
+}
+.fieldset{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  background: rgba(255,255,255,0.30);
+}
+.fieldset legend{
+  padding: 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+label{
+  display:block;
+  font-size: 14px;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+input, textarea, select{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(20,20,20,0.12);
+  background: rgba(255,255,255,0.65);
+  font-size: 15px;
+  color: var(--ink);
+}
+textarea{min-height: 110px; resize: vertical;}
+.grid2{
+  display:grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 767px){
+  .grid2{grid-template-columns: 1fr;}
+}
+
+.footer{
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line);
+}
+.footer-inner{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: var(--space-4);
+  flex-wrap:wrap;
+}
+.footer a{color: var(--slate);}
+.footer a:hover{color: var(--accent);}
+.footer small{display:block; margin-top: 8px;}
+
+.fade-in{
+  opacity:0;
+  transform: translateY(8px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+.fade-in.visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Single-file routing helpers */
+.view{display:none;}
+.view.active{display:block;}
+
+  </style>
 </head>
-
 <body>
 
-<!-- Hero -->
-<section class="hero">
-    <div class="subtitle">Independent Decision Advisory</div>
-    <h1>我们不卖移民项目，<br>只站在你这一边，帮你把决定拆解清楚。</h1>
-    <p>
-        市场上有成千上万家机构在向你推项目。<br>
-        但在你真正做出这个决定之前，<strong>你是否清楚它的真实收益、风险边界，以及你要为它承担什么？</strong>
-    </p>
-    <a href="#consult" class="button">预约一次独立咨询</a>
+<header class="topbar">
+  <div class="container">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#home" aria-label="GP Partners Home" data-nav="home">
+          <span aria-hidden="true" style="display:inline-flex; width:26px; height:26px;"><svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none"> <rect x="0" y="0" width="256" height="256" rx="40" fill="#F6F2EA"/> <path d="M86 56v144" stroke="#141414" stroke-width="10" stroke-linecap="round"/> <path d="M170 56v144" stroke="#141414" stroke-width="10" stroke-linecap="round"/> <circle cx="128" cy="128" r="10" fill="#8A6B3A"/> </svg></span>
+          <span>GP Partners</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#home" data-nav="home">Home</a>
+          <a href="#services" data-nav="services">Services</a>
+          <a href="#process" data-nav="process">Process</a>
+          <a href="#about" data-nav="about">About</a>
+          <a href="#contact" data-nav="contact">Contact</a>
+          <a href="#memos" data-nav="memos">Decision Memos</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+          <button id="mobileToggle" class="mobile-toggle" aria-label="Open menu" aria-expanded="false">
+            <span style="font-size:18px; line-height:1;">≡</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobilePanel" class="mobile-panel" role="navigation" aria-label="Mobile navigation">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#services" data-nav="services">Services</a>
+        <a href="#process" data-nav="process">Process</a>
+        <a href="#about" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+        <a href="#memos" data-nav="memos">Decision Memos</a>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+          <small>We respond selectively and deliberately.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div id="view-home" class="view" data-route="home">
+<section class="section-hero">
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">POSITION</div>
+        <h1>我们不卖移民项目，只站在你这一边，帮你把这个决定拆解清楚。</h1>
+        <p class="lede">Independent Decision Advisory</p>
+
+        <div class="mt4">
+          <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+          <div class="bridge">We work before commitment. No programs. No commissions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Problem -->
+<section class="section-tight">
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">WHAT THIS IS</div>
+        <h2>We work before commitment.</h2>
+        <p class="lede">在身份、资产与跨境选择的重大决策里，很多“建议”来自可售卖的路径，而不是可撤回的现实。我们只做一件事：把不确定性摊开，让你在承诺之前仍然能做出可辩护的决定。</p>
+        <div class="bridge">We focus on structure, not outcomes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">HOW WE LOOK AT DECISIONS</div>
+        <h2>五个问题，贯穿所有判断。</h2>
+
+        <div class="list mt4">
+          <div class="item">
+            <div class="key">Control</div>
+            <div class="val">完成之后，你还剩下多少控制权（可撤回性、可调整性）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Liquidity</div>
+            <div class="val">如果你想退出，现实是否允许（时间、条件、真实买方）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Concentration</div>
+            <div class="val">风险是否被压缩在一个点上（国家/制度/时间节点）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Asymmetry</div>
+            <div class="val">谁在推动这个决定，谁承担后果（激励是否对称）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Optionality</div>
+            <div class="val">这个决定为你保留了多少未来选项（是否过早封死未来）。</div>
+          </div>
+        </div>
+
+        <div class="bridge">Below are selected memos showing how reasoning looked in real time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMOS</div>
+        <h2>Decision Memos｜判断纪要</h2>
+
+        <div class="cards mt4">
+          <a class="card memo-card" href="#memo-01" data-type="Identity Path" data-lens="Control,Liquidity">
+            <div class="meta">
+              <div class="caseid">DM-01 · Turkey</div>
+              <div class="tags">
+                <span class="tag">Identity Path</span>
+                <span class="tag">Control</span>
+                <span class="tag">Liquidity</span>
+              </div>
+            </div>
+            <h3>Fast citizenship, slow exits</h3>
+            <small>Asset control, FX exposure, and the real cost of leaving.</small>
+          </a>
+
+          <a class="card memo-card" href="#memo-02" data-type="Capital Lock" data-lens="Liquidity">
+            <div class="meta">
+              <div class="caseid">DM-02 · Portugal</div>
+              <div class="tags">
+                <span class="tag">Capital Lock</span>
+                <span class="tag">Liquidity</span>
+              </div>
+            </div>
+            <h3>Compliance comfort, liquidity illusion</h3>
+            <small>Donation vs fund route — and why “regulated” ≠ “exit-able”.</small>
+          </a>
+
+          <a class="card memo-card" href="#memo-03" data-type="Investment Threshold" data-lens="Concentration,Optionality">
+            <div class="meta">
+              <div class="caseid">DM-03 · Hong Kong</div>
+              <div class="tags">
+                <span class="tag">Investment Threshold</span>
+                <span class="tag">Concentration</span>
+                <span class="tag">Optionality</span>
+              </div>
+            </div>
+            <h3>Threshold is not the risk</h3>
+            <small>Concentration and loss of flexibility under a single allocation.</small>
+          </a>
+        </div>
+
+        <div class="mt4">
+          <a class="underline" href="#memos">View all memos →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in statement">
+        <div class="title">BOUNDARIES</div>
+        <div class="lines">
+          <div>我们不提供项目推荐与执行推进。</div>
+          <div>我们只在承诺之前介入，确保关键风险没有被忽略。</div>
+          <div>We stop where execution begins.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div id="view-services" class="view" data-route="services">
 <section>
-    <h2>为什么这个决定，越来越难做？</h2>
-    <p>
-        信息从未如此透明，但判断从未如此稀缺。<br>
-        官方说法、自媒体解读、机构建议往往彼此矛盾，而真正重要的风险、限制和退出成本，常常被忽略。
-    </p>
-</section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">HOW WE WORK</div>
+        <h1>Where Our Responsibility Begins — and Ends</h1>
+        <p class="lede">我们的工作发生在决定尚未被锁定之前。那是你仍能保留控制权、流动性与未来选项的阶段。</p>
+      </div>
 
-<!-- Who we are -->
-<section class="alt">
-    <h2>GP Partners 是谁？</h2>
-    <p>
-        我们是一家<strong>独立的身份与跨境决策顾问机构</strong>。<br>
-        我们不代理项目、不收取销售佣金，也不以成交为目标。
-    </p>
+      <div class="fade-in mt6">
+        <h2>What we do</h2>
+        <div class="list mt4">
+          <div class="item"><div class="key">Expose structure</div><div class="val">把被包装成“机会”的不确定性摊开，拆解结构性风险。</div></div>
+          <div class="item"><div class="key">Surface irreversibilities</div><div class="val">指出不可逆点：哪些动作一旦发生，就改变你的选项集合。</div></div>
+          <div class="item"><div class="key">Preserve optionality</div><div class="val">帮助你保留未来选择，避免过早下注与路径锁定。</div></div>
+        </div>
+        <div class="bridge">A clear boundary requires a clear process.</div>
+      </div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>我们不做什么</h3>
-            <p>
-                不卖移民项目<br>
-                不替机构背书<br>
-                不承诺结果
-            </p>
+      <div class="fade-in mt6">
+        <h2>Where we stop</h2>
+        <p class="lede">当进入申请、交易或落地环节，你需要的是执行专业人士（法律、税务、申请、资产执行）。我们的角色止于此之前——以保护判断的独立性与清晰度。</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>What you leave with</h2>
+        <div class="list mt4">
+          <div class="item"><div class="key">Reframed question</div><div class="val">更清晰的决策问题定义（不是“能不能做”，而是“为什么现在必须做”）。</div></div>
+          <div class="item"><div class="key">Risk layering</div><div class="val">风险分层：可逆/不可逆，哪些风险被低估、延后或外部化。</div></div>
+          <div class="item"><div class="key">Flip conditions</div><div class="val">触发条件：哪些变化会改变判断，何时应重新评估。</div></div>
+          <div class="item"><div class="key">Less urgency</div><div class="val">更少被制造的紧迫感，更高的可辩护性与稳定性。</div></div>
         </div>
-        <div class="card">
-            <h3>我们只对一件事负责</h3>
-            <p>
-                帮你把决定的逻辑、代价与后果，在你签字之前拆解清楚。
-            </p>
-        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+      </div>
     </div>
+  </div>
 </section>
-
-<!-- Method -->
+</div>
+<div id="view-process" class="view" data-route="process">
 <section>
-    <h2>我们如何帮你把决定做好？</h2>
-    <p>
-        每一次咨询，我们都会从同一套判断结构出发，而不是项目立场。
-    </p>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">PROCESS</div>
+        <h1>Our Process Is Deliberately Simple</h1>
+        <p class="lede">不是为了更快推进，而是为了让判断在不确定性中保持干净。</p>
+      </div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>正向确认</h3>
-            <p>你真正能从这个身份中获得什么，而不是宣传里承诺的是什么。</p>
+      <div class="fade-in mt6">
+        <h2>Four steps</h2>
+        <div class="steps mt4">
+          <div class="step">
+            <div class="num">1</div>
+            <div class="text">
+              <h3>Clarify the real question</h3>
+              <p>把“能不能做”改写成“为什么现在必须做”。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <div class="text">
+              <h3>Expose the structure</h3>
+              <p>拆解控制权、退出、集中风险、激励与未来选项。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <div class="text">
+              <h3>Hold the tension</h3>
+              <p>不急着给方向，让权衡完整出现。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <div class="text">
+              <h3>Decision, yours</h3>
+              <p>你做决定，我们只负责让它足够清醒。</p>
+            </div>
+          </div>
         </div>
-        <div class="card">
-            <h3>风险拆解</h3>
-            <p>法律、税务、资产流动性与政策不确定性。</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Engagement stages</h2>
+        <div class="list mt4">
+          <div class="item">
+            <div class="key">Stage 1</div>
+            <div class="val"><strong>Decision Scoping</strong> — 判断是否值得被判断（定界）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Stage 2</div>
+            <div class="val"><strong>Judgment Engagement</strong> — 核心判断阶段（结构拆解与风险分层）。</div>
+          </div>
+          <div class="item">
+            <div class="key">Stage 3</div>
+            <div class="val"><strong>Closing Reflection</strong>（可选）— 收口与交接摘要（止于执行）。</div>
+          </div>
         </div>
-        <div class="card">
-            <h3>决策建议</h3>
-            <p>是否值得做，以及在什么前提下做。</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">STOP LINE</div>
+        <div class="lines">
+          <div>We stop where execution begins.</div>
+          <div>当进入申请、交易或落地环节，你需要的是执行专业人士。</div>
         </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+      </div>
     </div>
+  </div>
 </section>
-
-<!-- Cases -->
-<section class="alt">
-    <h2>判断纪要 · 三个真实场景</h2>
-
-    <div class="grid">
-        <div class="card">
-            <div class="case-title">土耳其护照｜房产路径</div>
-            <p>
-                重点不是“能不能拿护照”，而是三年后的美元退出能力、税务居民身份变化及家庭资产配置影响。
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="case-title">葡萄牙｜基金移民</div>
-            <p>
-                判断核心在于基金清算结构、管理人激励机制以及真实退出案例，而非“官方合规”四个字。
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="case-title">香港｜投资入境</div>
-            <p>
-                我们评估的不是政策门槛，而是身份使用价值与未来税务结构的长期适配度。
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Fit -->
+</div>
+<div id="view-about" class="view" data-route="about">
 <section>
-    <h2>我们适合谁？</h2>
-    <p>
-        已经被推着往前走，但不想在关键决策上失去主动权的人。
-    </p>
-</section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">ABOUT</div>
+        <h1>About GP Partners</h1>
+        <p class="lede">GP Partners is built to remain small, independent, and deliberate.</p>
+      </div>
 
-<!-- Process -->
-<section class="alt">
-    <h2>咨询流程</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>1. 预约咨询</h3>
-            <p>提交你的基本背景与关注问题。</p>
+      <div class="fade-in mt6">
+        <h2>Why we exist</h2>
+        <p class="lede">在身份、资产与跨境选择的重大决策中，很多“建议”由可售卖的路径塑形，而不是由可撤回性约束。我们存在，是为了在承诺之前，把不确定性与结构性风险摊开。</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>What we are</h2>
+        <p class="lede">GP Partners is an independent decision advisory. 我们不代表任何国家、项目、基金或中介，不参与销售与执行，不与结果绑定。</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>What we draw from</h2>
+        <p class="lede">The firm brings together professionals with backgrounds across cross-border asset structuring, regulatory interpretation, and complex decision-making under uncertainty. 我们更像“审议系统”，而不是“推进系统”。</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>How we measure our work</h2>
+        <p class="lede">我们不以 approvals、时间线或“完成度”衡量工作。有些判断以行动结束，有些以克制结束。两者都可能是负责任的结果——前提是判断在当时的信息边界内仍然可被辩护。</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">CLOSING</div>
+        <div class="lines">
+          <div>Good decisions are rarely urgent.</div>
+          <div>They are patient, deliberate, and defensible over time.</div>
         </div>
-        <div class="card">
-            <h3>2. 独立分析</h3>
-            <p>不基于项目，而基于你的个人与家庭结构。</p>
-        </div>
-        <div class="card">
-            <h3>3. 判断结论</h3>
-            <p>给出清晰、可执行的决策建议。</p>
-        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="btn btn-primary" href="#contact">Request a Conversation</a>
+      </div>
     </div>
+  </div>
+</section>
+</div>
+<div id="view-contact" class="view" data-route="contact">
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">CONTACT</div>
+        <h1>Request a Conversation</h1>
+        <p class="lede">Not every decision needs advice. Not every advice needs action.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Who this is for</h2>
+        <div class="list mt4">
+          <div class="item"><div class="key">Material</div><div class="val">你面对的是足够重大、可能不可逆的跨境决策。</div></div>
+          <div class="item"><div class="key">Unresolved</div><div class="val">你听到的信息很自信，但你仍感觉不完整、不踏实。</div></div>
+          <div class="item"><div class="key">Before commitment</div><div class="val">你还没有被路径锁死——仍有空间保留控制权与选项。</div></div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">BEFORE YOU SUBMIT</div>
+        <div class="lines">
+          <div>这不是资格评估，也不是项目匹配。</div>
+          <div>我们只用它确认：这个决定是否值得被结构化判断。</div>
+          <div>资金只需区间；不知道的地方写 <strong>unknown</strong> 即可。</div>
+          <div>任何提交内容均被视为保密。</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Fit Submission</h2>
+        <form id="fitForm" class="form mt4" novalidate>
+          <fieldset class="fieldset">
+            <legend>Decision</legend>
+            <label for="decision">1) 你正在考虑的决定（一句话）</label>
+            <textarea id="decision" name="decision" required placeholder="例如：是否开启某国身份路径 / 是否进入某基金路径 / 是否进行大额集中投资以换取资格等"></textarea>
+
+            <label class="mt4" for="whyNow">2) 为什么是现在？触发点是什么？</label>
+            <textarea id="whyNow" name="whyNow" required></textarea>
+
+            <label class="mt4" for="doNothing">3) 如果你什么都不做，等 6–12 个月，真实损失是什么？</label>
+            <textarea id="doNothing" name="doNothing" required></textarea>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Narrative & Incentives</legend>
+            <label for="story">4) 你听到的“最吸引人的说法”是什么？（尽量原话）</label>
+            <textarea id="story" name="story" required placeholder="Please paste the claims verbatim."></textarea>
+
+            <div class="grid2 mt4">
+              <div>
+                <label for="pusher">5) 是谁在推动/建议你走这条路？</label>
+                <input id="pusher" name="pusher" required placeholder="agent / lawyer / fund / friend / family / bank / other"/>
+              </div>
+              <div>
+                <label for="comp">他们如何收费/获利？（unknown acceptable）</label>
+                <input id="comp" name="comp" required placeholder="unknown / referral / commission / fee / other"/>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Constraints</legend>
+            <label for="nonneg">6) 你的底线（最多 3 条）：做完后什么必须保持不变？</label>
+            <textarea id="nonneg" name="nonneg" required placeholder="例如：资产可控、可退出、家庭一致、税务不恶化、可保留选项等"></textarea>
+
+            <label class="mt4" for="constraints">7) 你的约束：时间/资金流动性/家庭安排（简述）</label>
+            <textarea id="constraints" name="constraints" required></textarea>
+
+            <div class="grid2 mt4">
+              <div>
+                <label for="range">8) 涉及资金规模（区间即可）</label>
+                <select id="range" name="range" required>
+                  <option value="">Select one</option>
+                  <option>&lt; $250k</option>
+                  <option>$250k–$1M</option>
+                  <option>$1M–$5M</option>
+                  <option>$5M+</option>
+                </select>
+              </div>
+              <div>
+                <label for="timezone">11) 时区（例如 America/Los_Angeles）</label>
+                <input id="timezone" name="timezone" required placeholder="America/Los_Angeles"/>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Materials & Outcome</legend>
+            <label for="docs">9) 现有材料（可列清单）</label>
+            <textarea id="docs" name="docs" placeholder="term sheet / fund docs / agent proposal / legal memo / bank note / none"></textarea>
+
+            <div class="statement mt4">
+              <div class="title">ENCRYPTED MATERIALS (OPTIONAL)</div>
+              <div class="lines">
+                <div>We do not require documents to begin.</div>
+                <div>If you share materials, please redact personal identifiers.</div>
+                <div>Preferred: password-protected ZIP or encrypted link. Share the key via a separate channel.</div>
+              </div>
+            </div>
+
+            <label class="mt4" for="secureLink">Encrypted link (optional)</label>
+            <input id="secureLink" name="secureLink" placeholder="https://… (password-protected / encrypted)"/>
+
+            <div class="grid2 mt4">
+              <div>
+                <label for="keyMethod">Key sharing method (optional)</label>
+                <select id="keyMethod" name="keyMethod">
+                  <option value="">Select one</option>
+                  <option>WeChat (separate message)</option>
+                  <option>Signal / encrypted messenger</option>
+                  <option>Email (separate thread)</option>
+                  <option>Share after scope is confirmed</option>
+                </select>
+              </div>
+              <div>
+                <label for="secureFile">Secure upload (coming soon)</label>
+                <input id="secureFile" name="secureFile" type="file" disabled />
+                <small>Placeholder only. For now, use an encrypted link above.</small>
+              </div>
+            </div>
+
+
+            <label class="mt4" for="clarity">10) 你希望得到什么“清晰度”（不要写结果）</label>
+            <textarea id="clarity" name="clarity" required placeholder="Not the outcome you want, the clarity you want."></textarea>
+
+            <div class="grid2 mt4">
+              <div>
+                <label for="wechat">11) 微信号（或你希望的联系方式）</label>
+                <input id="wechat" name="wechat" required placeholder="WeChat ID / email"/>
+              </div>
+              <div>
+                <label for="dont">12) 有什么你不希望我们做/讨论的（选填）</label>
+                <input id="dont" name="dont" placeholder="optional"/>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="grid2">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-ghost" type="reset">Reset</button>
+          </div>
+
+          <small class="bridge">提交后，我们会先判断：这是不是一个“值得被判断”的决策（而不是能不能做）。如在范围内，我们将提出 Stage 1：Decision Scoping 的会谈提议。我们会选择性与谨慎地回应。</small>
+        </form>
+
+        <div id="submitResult" class="statement mt6" style="display:none;">
+          <div class="title">SUBMISSION RECEIVED</div>
+          <div class="lines">
+            <div>Thank you. We review submissions selectively.</div>
+            <div>If within scope, we will propose Stage 1: Decision Scoping.</div>
+            <div>If not, we will say so plainly.</div>
+          </div>
+          <div class="mt4">
+            <button id="downloadJson" class="btn" type="button">Download JSON Summary</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Prefer WeChat?</h2>
+        <p class="lede">你也可以在微信里按同样的问题结构提交。我们建议用“结构化输入”，而不是来回聊很久再进入判断。</p>
+        <div class="statement mt4">
+          <div class="title">WECHAT</div>
+          <div class="lines">
+            <div>WeChat ID: <strong>GPPartners</strong></div>
+            <div>（示例占位。上线前替换为你的微信号或二维码。）</div>
+          </div>
+          <div class="mt4">
+            <button id="copyWeChat" class="btn" data-wechat="GPPartners" type="button">Copy WeChat ID</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">PRIVACY</div>
+        <div class="lines">
+          <div>资金只需区间；敏感信息不必提交。</div>
+          <div>即使最终不合作，也同样保密。</div>
+          <div><a class="underline" href="#privacy">Read Privacy Policy</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section id="consult">
-    <h2>在你做决定之前，先把判断交给我们。</h2>
-    <a href="#" class="button">预约独立咨询</a>
+<script>
+(function(){
+  const form = document.getElementById('fitForm');
+  const result = document.getElementById('submitResult');
+  const downloadBtn = document.getElementById('downloadJson');
+  let lastPayload = null;
+
+  if(form){
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const obj = {};
+      data.forEach((v,k)=> obj[k]=String(v).trim());
+      lastPayload = {
+        submitted_at: new Date().toISOString(),
+        scope: "Fit Submission",
+        responses: obj
+      };
+      result.style.display = "block";
+      result.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  }
+  if(downloadBtn){
+    downloadBtn.addEventListener('click', () => {
+      if(!lastPayload) return;
+      const blob = new Blob([JSON.stringify(lastPayload, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "gp-fit-submission.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  }
+})();
+</script>
+</div>
+<div id="view-memos" class="view" data-route="memos">
+<section>
+  <div class="container">
+    <div class="wrap" id="memoIndex">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMOS</div>
+        <h1>Decision Memos｜判断纪要</h1>
+        <p class="lede">Notes on decisions made under uncertainty.</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">MODULE CONSTITUTION</div>
+        <div class="lines">
+          <div>No outcomes are reported.</div>
+          <div>No decisions are endorsed.</div>
+          <div>Anonymized and structural; details intentionally withheld.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Filters</h2>
+        <small id="activeFilters" class="bridge">Showing all memos</small>
+
+        <div class="mt4">
+          <div class="kicker">DECISION TYPE</div>
+          <div class="chips mt2">
+            <button class="chip" type="button" data-group="type" data-value="Identity Path">Identity Path</button>
+            <button class="chip" type="button" data-group="type" data-value="Capital Lock">Capital Lock</button>
+            <button class="chip" type="button" data-group="type" data-value="Investment Threshold">Investment Threshold</button>
+            <button class="chip" type="button" data-group="type" data-value="Waiting Decision">Waiting Decision</button>
+          </div>
+        </div>
+
+        <div class="mt4">
+          <div class="kicker">PRIMARY LENS</div>
+          <div class="chips mt2">
+            <button class="chip" type="button" data-group="lens" data-value="Control">Control</button>
+            <button class="chip" type="button" data-group="lens" data-value="Liquidity">Liquidity</button>
+            <button class="chip" type="button" data-group="lens" data-value="Concentration">Concentration</button>
+            <button class="chip" type="button" data-group="lens" data-value="Asymmetry">Asymmetry</button>
+            <button class="chip" type="button" data-group="lens" data-value="Optionality">Optionality</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>Archive</h2>
+        <div class="cards mt4">
+          <a class="card memo-card" href="#memo-01" data-type="Identity Path" data-lens="Control,Liquidity">
+            <div class="meta">
+              <div class="caseid">DM-01 · Turkey</div>
+              <div class="tags">
+                <span class="tag">Identity Path</span><span class="tag">Control</span><span class="tag">Liquidity</span>
+              </div>
+            </div>
+            <h3>Fast citizenship, slow exits</h3>
+            <small>Asset control, FX exposure, and the real cost of leaving.</small>
+          </a>
+
+          <a class="card memo-card" href="#memo-02" data-type="Capital Lock" data-lens="Liquidity">
+            <div class="meta">
+              <div class="caseid">DM-02 · Portugal</div>
+              <div class="tags">
+                <span class="tag">Capital Lock</span><span class="tag">Liquidity</span>
+              </div>
+            </div>
+            <h3>Compliance comfort, liquidity illusion</h3>
+            <small>Donation vs fund route — and why “regulated” ≠ “exit-able”.</small>
+          </a>
+
+          <a class="card memo-card" href="#memo-03" data-type="Investment Threshold" data-lens="Concentration,Optionality">
+            <div class="meta">
+              <div class="caseid">DM-03 · Hong Kong</div>
+              <div class="tags">
+                <span class="tag">Investment Threshold</span><span class="tag">Concentration</span><span class="tag">Optionality</span>
+              </div>
+            </div>
+            <h3>Threshold is not the risk</h3>
+            <small>Concentration and loss of flexibility under a single allocation.</small>
+          </a>
+
+          <a class="card memo-card" href="#memo-04" data-type="Waiting Decision" data-lens="Optionality,Asymmetry">
+            <div class="meta">
+              <div class="caseid">DM-04 · Waiting</div>
+              <div class="tags">
+                <span class="tag">Waiting Decision</span><span class="tag">Optionality</span><span class="tag">Asymmetry</span>
+              </div>
+            </div>
+            <h3>When urgency is manufactured</h3>
+            <small>Doing nothing is also a decision — when reversibility remains.</small>
+          </a>
+        </div>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">NOTE</div>
+        <div class="lines">
+          <div>These memos show reasoning under uncertainty at the time stated.</div>
+          <div>They are not case studies, and they do not report outcomes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div id="view-memo-01" class="view" data-route="memo-01">
+
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMO</div>
+        <div class="caseid">DM-01 · Turkey</div>
+        <h1>Fast citizenship, slow exits</h1>
+        <p class="lede">当“速度”成为主标题时，退出与控制权往往被写进脚注。</p>
+        <div class="mt4 tags"><span class="tag">Identity Path</span><span class="tag">Control</span><span class="tag">Liquidity</span></div>
+      </div>
+
+      
+      <div class="fade-in mt4">
+        <div class="list">
+          <div class="item"><div class="key">Decision type</div><div class="val">Identity Path</div></div>
+          <div class="item"><div class="key">Primary lens</div><div class="val">Control, Liquidity</div></div>
+          <div class="item"><div class="key">Judgment window</div><div class="val">2025 Q4</div></div>
+          <div class="item"><div class="key">Public note</div><div class="val">Anonymized and structural; details intentionally withheld.</div></div>
+        </div>
+        <div class="bridge">Reasoning reflects the time stated. No outcomes are reported.</div>
+      </div>
+    
+
+      
+        <div class="fade-in mt6">
+          <h2>1. Context</h2>
+          <p class="lede">一个家庭在评估快速身份路径，动机是提升跨境机动性与不确定时期的选择权。</p>
+<p class="lede">讨论发生在承诺之前：资金仍可调度，但一旦启动路径，时间与资产的控制权会被重写。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>2. The Attractive Story</h2>
+          <p class="lede">“流程快、门槛明确、成本可控。”</p>
+<p class="lede">“先把身份拿到手，之后再慢慢决定下一步。”</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>3. Constraints & Unknowns</h2>
+          <p class="lede">退出路径在纸面上存在，但真实退出取决于未来的市场、对手方与时间窗口。</p>
+<p class="lede">汇率与政策变量不可控；我们只能判断暴露的结构，而不能预测其方向。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>4. Structural Breakdown</h2>
+          <p class="lede">Control：资金进入后，哪些环节会让你失去主动权（时间锁、对手方锁、手续锁）。</p>
+<p class="lede">Liquidity：可退出的表述是否对应真实买方与可行窗口，还是“理论条款”。</p>
+<p class="lede">Concentration：风险是否被集中到单一辖区与单一币种暴露上。</p>
+<p class="lede">Asymmetry：推动者的收益来自推进本身，而悲观情景下的成本由你承担。</p>
+<p class="lede">Optionality：所谓“先拿身份”是否真的增加选项，还是同时削弱资金与时间的可用性。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>5. The Tension</h2>
+          <p class="lede">速度带来的安全感很强，但速度也会缩短你反悔与调整的空间。</p>
+<p class="lede">纠结并不在于“做不做”，而在于“用多少控制权去交换速度”。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>6. Flip Conditions</h2>
+          <p class="lede">若出现可验证的退出机制（真实成交/二级市场/清算实践），流动性判断会改变。</p>
+<p class="lede">若家庭未来两年的资金用途变得刚性（教育/居住/税务安排），则控制权权重上升，路径吸引力下降。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>7. What this memo teaches</h2>
+          <p class="lede">When speed is the headline, control and exit usually become the fine print.</p>
+        </div>
+        
+
+      <div class="fade-in mt6 statement">
+        <div class="title">BOUNDARY</div>
+        <div class="lines">
+          <div>No outcomes are reported.</div>
+          <div>No decisions are endorsed.</div>
+          <div>This memo documents reasoning under uncertainty at the stated time.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="underline" href="#memos">← Back to Decision Memos</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Footer -->
+</div>
+<div id="view-memo-02" class="view" data-route="memo-02">
+
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMO</div>
+        <div class="caseid">DM-02 · Portugal</div>
+        <h1>Compliance comfort, liquidity illusion</h1>
+        <p class="lede">“合规”容易让人安心，但流动性通常不是条款，而是现实。</p>
+        <div class="mt4 tags"><span class="tag">Capital Lock</span><span class="tag">Liquidity</span></div>
+      </div>
+
+      
+      <div class="fade-in mt4">
+        <div class="list">
+          <div class="item"><div class="key">Decision type</div><div class="val">Capital Lock</div></div>
+          <div class="item"><div class="key">Primary lens</div><div class="val">Liquidity</div></div>
+          <div class="item"><div class="key">Judgment window</div><div class="val">2025 Q4</div></div>
+          <div class="item"><div class="key">Public note</div><div class="val">Anonymized and structural; details intentionally withheld.</div></div>
+        </div>
+        <div class="bridge">Reasoning reflects the time stated. No outcomes are reported.</div>
+      </div>
+    
+
+      
+        <div class="fade-in mt6">
+          <h2>1. Context</h2>
+          <p class="lede">同一目标下出现两条可解释路径：捐赠与基金。</p>
+<p class="lede">讨论聚焦于：资金的不可逆性与退出的现实性，而非收益叙事。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>2. The Attractive Story</h2>
+          <p class="lede">捐赠：“简单、确定、少变量。”</p>
+<p class="lede">基金：“受监管、可持有、甚至可能有回报；并且可退出。”</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>3. Constraints & Unknowns</h2>
+          <p class="lede">基金“可退出”通常依赖未来对手方与窗口；我们无法把它当作确定选项。</p>
+<p class="lede">不同基金之间的清算机制、赎回安排与底层资产可变现性差异，外部叙事往往不会主动讲清。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>4. Structural Breakdown</h2>
+          <p class="lede">捐赠：成本确定但不可回收（不可逆）。它的风险是“确定的损失”，优势是“确定的结束”。</p>
+<p class="lede">基金：合规 ≠ 可退出；可退出 ≠ 有买方；有买方 ≠ 在你需要的时间点；常见风险集中在清算与折价。</p>
+<p class="lede">关键差异不在收益，而在：赎回窗口、侧袋/暂停机制、底层资产的变现速度、管理人激励。</p>
+<p class="lede">当退出依赖“未来市场情绪”，它更像流动性风险，而不是选项。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>5. The Tension</h2>
+          <p class="lede">捐赠的确定性让人踏实，但不可逆；基金的叙事更好听，但不确定。</p>
+<p class="lede">纠结点在于：你真正需要的是“可解释”，还是“可退出”。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>6. Flip Conditions</h2>
+          <p class="lede">若能取得可验证的历史退出记录（真实清算/赎回兑现），基金路径的流动性不确定性会下降。</p>
+<p class="lede">若家庭对资金的时间需求变得清晰且刚性（例如 24 个月内需要动用），捐赠的不可逆性会更难接受。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>7. What this memo teaches</h2>
+          <p class="lede">When liquidity is sold as a feature, it often hides as a risk.</p>
+        </div>
+        
+
+      <div class="fade-in mt6 statement">
+        <div class="title">BOUNDARY</div>
+        <div class="lines">
+          <div>No outcomes are reported.</div>
+          <div>No decisions are endorsed.</div>
+          <div>This memo documents reasoning under uncertainty at the stated time.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="underline" href="#memos">← Back to Decision Memos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div id="view-memo-03" class="view" data-route="memo-03">
+
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMO</div>
+        <div class="caseid">DM-03 · Hong Kong</div>
+        <h1>Threshold is not the risk</h1>
+        <p class="lede">门槛只是筛选；真正的风险来自集中与灵活性下降。</p>
+        <div class="mt4 tags"><span class="tag">Investment Threshold</span><span class="tag">Concentration</span><span class="tag">Optionality</span></div>
+      </div>
+
+      
+      <div class="fade-in mt4">
+        <div class="list">
+          <div class="item"><div class="key">Decision type</div><div class="val">Investment Threshold</div></div>
+          <div class="item"><div class="key">Primary lens</div><div class="val">Concentration, Optionality</div></div>
+          <div class="item"><div class="key">Judgment window</div><div class="val">2025 Q4</div></div>
+          <div class="item"><div class="key">Public note</div><div class="val">Anonymized and structural; details intentionally withheld.</div></div>
+        </div>
+        <div class="bridge">Reasoning reflects the time stated. No outcomes are reported.</div>
+      </div>
+    
+
+      
+        <div class="fade-in mt6">
+          <h2>1. Context</h2>
+          <p class="lede">家庭评估高门槛的投资-资格路径，关注“能否承受门槛”与换取制度稳定的价值。</p>
+<p class="lede">但结构上更重要的问题是：一次性集中配置如何改变未来 2–5 年的选择权。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>2. The Attractive Story</h2>
+          <p class="lede">“门槛高意味着筛选与稳定。”</p>
+<p class="lede">“资产本来也要配置，顺便换取身份与选项。”</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>3. Constraints & Unknowns</h2>
+          <p class="lede">资产在纸面上可卖不等于在你需要的时间点可卖；退出往往与窗口、条件与折价相关。</p>
+<p class="lede">政策与市场环境可能变化，但我们只能判断集中结构的脆弱性，而不能预测方向。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>4. Structural Breakdown</h2>
+          <p class="lede">Concentration：为了满足条件而压缩到单一类别/单一市场/单一时点，悲观情景下没有分散空间。</p>
+<p class="lede">Optionality：资金结构被重排后，迁移、教育、税务与再配置的可选集合会收缩。</p>
+<p class="lede">Liquidity：即便可变现，也可能以折价与时间成本为代价；越集中，越难中途调整。</p>
+<p class="lede">Asymmetry：推动者强调门槛与稳定，但悲观情景下的机会成本由客户承担。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>5. The Tension</h2>
+          <p class="lede">门槛让人觉得更“正路”，但门槛也会把你锁在一个结构里。</p>
+<p class="lede">纠结点在于：身份带来的选项，是否值得用资产灵活性去交换。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>6. Flip Conditions</h2>
+          <p class="lede">若能证明资产配置在不牺牲多元分散的前提下完成，集中风险会下降，吸引力上升。</p>
+<p class="lede">若家庭未来两年的计划更依赖灵活资金（居住/教育/企业现金流），则该路径的机会成本上升。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>7. What this memo teaches</h2>
+          <p class="lede">A threshold is a filter — but it can also become a lock.</p>
+        </div>
+        
+
+      <div class="fade-in mt6 statement">
+        <div class="title">BOUNDARY</div>
+        <div class="lines">
+          <div>No outcomes are reported.</div>
+          <div>No decisions are endorsed.</div>
+          <div>This memo documents reasoning under uncertainty at the stated time.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="underline" href="#memos">← Back to Decision Memos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div id="view-memo-04" class="view" data-route="memo-04">
+
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">DECISION MEMO</div>
+        <div class="caseid">DM-04 · Waiting</div>
+        <h1>When urgency is manufactured</h1>
+        <p class="lede">等待不是拖延，而是对可逆性的守护。</p>
+        <div class="mt4 tags"><span class="tag">Waiting Decision</span><span class="tag">Optionality</span><span class="tag">Asymmetry</span></div>
+      </div>
+
+      
+      <div class="fade-in mt4">
+        <div class="list">
+          <div class="item"><div class="key">Decision type</div><div class="val">Waiting Decision</div></div>
+          <div class="item"><div class="key">Primary lens</div><div class="val">Optionality, Asymmetry</div></div>
+          <div class="item"><div class="key">Judgment window</div><div class="val">2026 Q1</div></div>
+          <div class="item"><div class="key">Public note</div><div class="val">Anonymized and structural; details intentionally withheld.</div></div>
+        </div>
+        <div class="bridge">Reasoning reflects the time stated. No outcomes are reported.</div>
+      </div>
+    
+
+      
+        <div class="fade-in mt6">
+          <h2>1. Context</h2>
+          <p class="lede">市场叙事持续强调“现在不做，将来会更难”，但当时并不存在明确的关闭节点。</p>
+<p class="lede">家庭并不急需身份本身，压力主要来自不确定性被持续放大与周围人的集体行动。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>2. The Attractive Story</h2>
+          <p class="lede">“政策方向已明确，只是早晚问题。”</p>
+<p class="lede">“提前布局，总比被动应对要好。”</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>3. Constraints & Unknowns</h2>
+          <p class="lede">没有明确触发条件与不可逆损失的证明时，紧迫感本身可能是外部节奏，而非现实约束。</p>
+<p class="lede">我们无法证明未来会发生什么，只能判断：现在行动会立即降低可逆性。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>4. Structural Breakdown</h2>
+          <p class="lede">Optionality：等待保留选项；提前下注会立刻降低可逆性与调整空间。</p>
+<p class="lede">Asymmetry：推动者在行动中获益，而客户在反向结果中承担后果。</p>
+<p class="lede">Liquidity/Control：若提前锁定资金或路径，未来面对家庭变化时的应对空间会变小。</p>
+<p class="lede">核心问题不是“会不会错过”，而是“现在行动的不可逆成本是否被证实”。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>5. The Tension</h2>
+          <p class="lede">理性上等待更安全；情绪上却难以承受“万一错过”的后悔恐惧。</p>
+<p class="lede">纠结点在于：你是在为现实约束行动，还是在为后悔恐惧行动。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>6. Flip Conditions</h2>
+          <p class="lede">若出现明确的政策时间窗或不可逆损失证据（关闭通知、名额机制等），等待的优势会下降。</p>
+<p class="lede">若家庭的真实需求变为刚性（例如明确迁移/教育节点），可逆性权重会下降，行动权重上升。</p>
+        </div>
+        
+        <div class="fade-in mt6">
+          <h2>7. What this memo teaches</h2>
+          <p class="lede">Doing nothing is also a decision — the question is whether it remains reversible.</p>
+        </div>
+        
+
+      <div class="fade-in mt6 statement">
+        <div class="title">BOUNDARY</div>
+        <div class="lines">
+          <div>No outcomes are reported.</div>
+          <div>No decisions are endorsed.</div>
+          <div>This memo documents reasoning under uncertainty at the stated time.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <a class="underline" href="#memos">← Back to Decision Memos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div id="view-terms" class="view" data-route="terms">
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">BOUNDARIES</div>
+        <h1>Terms of Engagement</h1>
+        <p class="lede">A statement of boundaries, not conditions.</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">SUMMARY</div>
+        <div class="lines">
+          <div>We advise on decisions, not outcomes.</div>
+          <div>We work before commitment.</div>
+          <div>We stop where execution begins.</div>
+        </div>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>1. Our role</h2>
+        <p class="lede">GP Partners is an independent decision advisory firm. Our responsibility is to help you see the structure of a decision clearly — including risks that are often minimized, deferred, or externalized. We do not replace legal, tax, or execution professionals.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>2. Independence</h2>
+        <p class="lede">We do not represent any country, program, fund, or intermediary. We do not receive commissions, referral fees, or success-based compensation. This independence allows us to focus on one question: is this decision worth making, given what cannot be undone later?</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>3. What engagement means</h2>
+        <p class="lede">An engagement with GP Partners is a structured conversation. It is not a promise of progress, approval, or results. Sometimes the most responsible outcome of our work is a clearer understanding of why a decision should not be rushed — or made at all.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>4. Client responsibility</h2>
+        <p class="lede">All final decisions remain yours. Our role is to clarify trade-offs, not to remove uncertainty. No advisory process can eliminate risk — only reveal it honestly.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>5. Confidentiality</h2>
+        <p class="lede">All discussions are treated as confidential. We do not reuse personal details for marketing, promotion, or illustration. Public Decision Memos are anonymized and structural, written for learning — not validation.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>6. Mutual fit</h2>
+        <p class="lede">We work best with clients who value clarity over reassurance, and understanding over momentum. If what you seek is confirmation, acceleration, or endorsement, GP Partners may not be the right advisor.</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">CLOSING</div>
+        <div class="lines">
+          <div>Good decisions are rarely urgent.</div>
+          <div>They are patient, deliberate, and defensible over time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div id="view-privacy" class="view" data-route="privacy">
+<section>
+  <div class="container">
+    <div class="wrap">
+      <div class="fade-in">
+        <div class="kicker">PRIVACY</div>
+        <h1>Privacy Policy</h1>
+        <p class="lede">Trust is earned through restraint.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <p class="lede">GP Partners works with decisions that may involve identity, capital, family structure, and jurisdiction. We treat privacy not as a compliance requirement, but as a prerequisite for honest judgment.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>1. Information we receive</h2>
+        <p class="lede">Information shared with us may include personal, financial, or jurisdictional details provided voluntarily by you. We collect only what is necessary to understand the decision being discussed.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>2. How information is used</h2>
+        <p class="lede">All information is used solely for advisory purposes within the context of the engagement. We do not sell, rent, share, or repurpose client information for marketing, promotion, or third-party use.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>3. Decision memos & publications</h2>
+        <p class="lede">Any Decision Memos or written observations published by GP Partners are anonymized, non-identifying, and focused on structural reasoning — not personal outcomes. No personal details are published without explicit consent.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>4. Data handling</h2>
+        <p class="lede">Information is stored and accessed on a need-to-know basis. We do not build mailing lists or conduct unsolicited outreach. We do not retain information beyond what is reasonably required.</p>
+      </div>
+
+      <div class="fade-in mt6">
+        <h2>5. Confidentiality as a boundary</h2>
+        <p class="lede">Confidentiality is not conditional on engagement. A conversation that does not proceed is treated with the same discretion as one that does.</p>
+      </div>
+
+      <div class="fade-in mt6 statement">
+        <div class="title">CLOSING</div>
+        <div class="lines">
+          <div>Privacy is a prerequisite for honest judgment.</div>
+          <div>We earn it through restraint.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+
 <footer class="footer">
-    <p>© 2026 GP Partners. All rights reserved.</p>
-    <p>
-        <a href="#">Terms of Engagement</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Contact</a>
-    </p>
+  <div class="container">
+    <div class="wrap footer-inner">
+      <div>
+        <strong>GP Partners</strong>
+        <small>Independent Decision Advisory</small>
+      </div>
+      <div style="display:flex; gap:18px; flex-wrap:wrap;">
+        <a href="#terms">Terms of Engagement</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <small style="margin-top:14px;">© 2026 GP Partners. Built to remain small, independent, and deliberate.</small>
+    </div>
+  </div>
 </footer>
 
+<script>
+(function(){
+  const $ = (sel, el=document) => el.querySelector(sel);
+  const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+
+  // Mobile nav
+  const toggle = $("#mobileToggle");
+  const panel = $("#mobilePanel");
+  if (toggle && panel){
+    toggle.addEventListener("click", () => {
+      const open = panel.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+
+  // Reveal on scroll (very subtle)
+  const reveals = $$(".fade-in");
+  if (reveals.length){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, {threshold: 0.12});
+    reveals.forEach(el => io.observe(el));
+  }
+
+  // Decision memos filtering
+  const memoIndex = $("#memoIndex");
+  if (memoIndex){
+    const chips = $$(".chip");
+    const cards = $$(".memo-card");
+    const state = {type: null, lens: null};
+
+    function apply(){
+      cards.forEach(card => {
+        const type = card.getAttribute("data-type");
+        const lens = card.getAttribute("data-lens") || "";
+        const okType = !state.type || type === state.type;
+        const okLens = !state.lens || lens.split(",").includes(state.lens);
+        card.style.display = (okType && okLens) ? "" : "none";
+      });
+      const activeText = $("#activeFilters");
+      if (activeText){
+        const parts = [];
+        if (state.type) parts.push(`Type: ${state.type}`);
+        if (state.lens) parts.push(`Lens: ${state.lens}`);
+        activeText.textContent = parts.length ? parts.join(" · ") : "Showing all memos";
+      }
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const group = chip.getAttribute("data-group");
+        const value = chip.getAttribute("data-value");
+
+        const isActive = chip.classList.contains("active");
+        $$(".chip[data-group='"+group+"']").forEach(c => c.classList.remove("active"));
+
+        if (!isActive){
+          chip.classList.add("active");
+          if (group === "type") state.type = value;
+          if (group === "lens") state.lens = value;
+        } else {
+          if (group === "type") state.type = null;
+          if (group === "lens") state.lens = null;
+        }
+        apply();
+      });
+    });
+
+    apply();
+  }
+
+  // Copy WeChat helper
+  const copyBtn = $("#copyWeChat");
+  if (copyBtn){
+    copyBtn.addEventListener("click", async () => {
+      const id = copyBtn.getAttribute("data-wechat") || "";
+      try{
+        await navigator.clipboard.writeText(id);
+        copyBtn.textContent = "Copied";
+        setTimeout(()=> copyBtn.textContent = "Copy WeChat ID", 1200);
+      }catch(e){
+        alert("Copy failed. Please copy manually: " + id);
+      }
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  const routes = ["home","services","process","about","contact","memos","memo-01","memo-02","memo-03","memo-04","terms","privacy"];
+  const viewEls = routes.map(r => document.getElementById("view-"+r)).filter(Boolean);
+
+  function normalize(hash){
+    const h = (hash || "").replace("#","").trim();
+    return routes.includes(h) ? h : "home";
+  }
+
+  function setActiveNav(route){
+    // desktop nav links
+    document.querySelectorAll("[data-nav]").forEach(a => {
+      const r = a.getAttribute("data-nav");
+      if (r === route) a.classList.add("active");
+      else a.classList.remove("active");
+    });
+  }
+
+  function show(route){
+    viewEls.forEach(v => v.classList.remove("active"));
+    const el = document.getElementById("view-"+route);
+    if (el) el.classList.add("active");
+
+    setActiveNav(route === "memo-01" || route === "memo-02" || route === "memo-03" || route === "memo-04" ? "memos" : route);
+
+    // Close mobile panel if open
+    const panel = document.getElementById("mobilePanel");
+    const toggle = document.getElementById("mobileToggle");
+    if (panel && panel.classList.contains("open")){
+      panel.classList.remove("open");
+      if (toggle) toggle.setAttribute("aria-expanded","false");
+    }
+
+    // Scroll top (quiet)
+    window.scrollTo({top: 0, behavior: "instant"});
+
+    // Ensure fade-in elements in active view become visible even if observer didn't trigger
+    if (el){
+      el.querySelectorAll(".fade-in").forEach(x => x.classList.add("visible"));
+    }
+  }
+
+  function onRoute(){
+    const route = normalize(location.hash);
+    show(route);
+  }
+
+  window.addEventListener("hashchange", onRoute);
+  onRoute();
+})();
+</script>
 </body>
 </html>
