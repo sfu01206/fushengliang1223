@@ -6,18 +6,23 @@
   <title>GP Partners｜独立决策顾问</title>
   <meta name="description" content="GP Partners｜独立决策顾问：不卖移民项目，只站在客户一边，把决定拆解清楚。逻辑优先于销售。"/>
   <meta name="theme-color" content="#0B1F3B"/>
+
+  <!-- 让 fade-in 在 JS 正常时才隐藏并做动画；JS 失败则默认可见 -->
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
   <style>
 /* =========================================================
    GP Partners — Single-file website (CN-first)
    Theme: Deep Sea Blue + Restrained Gold + Warm可信
-   No external assets required (no hero photo)
    ========================================================= */
 
 :root{
   /* brand */
   --nav-blue:#0B1F3B;
   --nav-blue-2:#081A33;
-  --gold:#C7A46A;                /* restrained gold */
+  --gold:#C7A46A;
   --gold-2:#B89256;
 
   /* surfaces */
@@ -201,10 +206,6 @@ h3{font-size: var(--h3); font-weight: 650;}
 }
 .btn-primary:hover{filter: brightness(0.98);}
 
-.btn-ghost{
-  background: transparent;
-}
-
 .mobile-toggle{
   display:none;
   width: 42px; height:42px;
@@ -264,7 +265,6 @@ section{padding: var(--s7) 0;}
   background-repeat:no-repeat;
   background-size: 1200px auto;
   background-position: center 55%;
-  filter: blur(0.0px);
 }
 .section-hero .wrap{position:relative;}
 
@@ -278,9 +278,7 @@ section{padding: var(--s7) 0;}
   .hero-grid{grid-template-columns: 1fr; gap: 22px;}
 }
 
-.hero-title{
-  color:#fff;
-}
+.hero-title{color:#fff;}
 .hero-lede{color: rgba(255,255,255,.86);}
 .hero-bridge{color: rgba(255,255,255,.78);}
 
@@ -450,9 +448,12 @@ textarea{min-height: 110px; resize: vertical;}
 .view{display:none;}
 .view.active{display:block;}
 
-/* simple reveal */
-.fade-in{opacity:0; transform: translateY(10px); transition: opacity 240ms ease, transform 240ms ease;}
-.fade-in.visible{opacity:1; transform: translateY(0);}
+/* =========================================================
+   Fade-in: JS 正常时才做动画；JS 不正常默认可见
+   ========================================================= */
+.fade-in{opacity:1; transform:none;}
+html.js .fade-in{opacity:0; transform: translateY(10px); transition: opacity 240ms ease, transform 240ms ease;}
+html.js .fade-in.visible{opacity:1; transform: translateY(0);}
 
 /* helper */
 .hr{
@@ -461,9 +462,7 @@ textarea{min-height: 110px; resize: vertical;}
   margin: var(--s6) 0;
 }
 
-/* =========================================================
-   Buttons inside light sections
-   ========================================================= */
+/* light buttons */
 .btn-dark{
   display:inline-flex; align-items:center; justify-content:center;
   height: 46px; padding: 0 18px;
@@ -483,7 +482,6 @@ textarea{min-height: 110px; resize: vertical;}
   font-weight: 650;
 }
 .btn-dark-primary:hover{filter: brightness(1.03);}
-
   </style>
 </head>
 
@@ -541,9 +539,7 @@ textarea{min-height: 110px; resize: vertical;}
 
 <main>
 
-<!-- ======================================================
-     HOME
-     ====================================================== -->
+<!-- HOME -->
 <div id="view-home" class="view" data-route="home">
   <section class="section-hero">
     <div class="container">
@@ -710,9 +706,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     SERVICES
-     ====================================================== -->
+<!-- SERVICES -->
 <div id="view-services" class="view" data-route="services">
   <section>
     <div class="container">
@@ -767,9 +761,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     PROCESS
-     ====================================================== -->
+<!-- PROCESS -->
 <div id="view-process" class="view" data-route="process">
   <section>
     <div class="container">
@@ -783,34 +775,10 @@ textarea{min-height: 110px; resize: vertical;}
         <div class="fade-in" style="margin-top:48px;">
           <h2>四步走</h2>
           <div class="steps grid2" style="margin-top:24px;">
-            <div class="step">
-              <div class="num">1</div>
-              <div>
-                <h3>把问题定清</h3>
-                <p class="lede">把“能不能做”改写成“为什么现在必须做”。</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="num">2</div>
-              <div>
-                <h3>把结构摊开</h3>
-                <p class="lede">控制权、退出、集中风险、激励与未来选项逐项拆解。</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="num">3</div>
-              <div>
-                <h3>把张力留住</h3>
-                <p class="lede">不急着给方向，让权衡完整出现。</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="num">4</div>
-              <div>
-                <h3>决定归你</h3>
-                <p class="lede">你做决定，我们只负责让它足够清醒。</p>
-              </div>
-            </div>
+            <div class="step"><div class="num">1</div><div><h3>把问题定清</h3><p class="lede">把“能不能做”改写成“为什么现在必须做”。</p></div></div>
+            <div class="step"><div class="num">2</div><div><h3>把结构摊开</h3><p class="lede">控制权、退出、集中风险、激励与未来选项逐项拆解。</p></div></div>
+            <div class="step"><div class="num">3</div><div><h3>把张力留住</h3><p class="lede">不急着给方向，让权衡完整出现。</p></div></div>
+            <div class="step"><div class="num">4</div><div><h3>决定归你</h3><p class="lede">你做决定，我们只负责让它足够清醒。</p></div></div>
           </div>
         </div>
 
@@ -841,9 +809,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     ABOUT
-     ====================================================== -->
+<!-- ABOUT -->
 <div id="view-about" class="view" data-route="about">
   <section>
     <div class="container">
@@ -897,9 +863,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     CONTACT
-     ====================================================== -->
+<!-- CONTACT -->
 <div id="view-contact" class="view" data-route="contact">
   <section>
     <div class="container">
@@ -1057,7 +1021,7 @@ textarea{min-height: 110px; resize: vertical;}
 
         <div class="fade-in" style="margin-top:48px;">
           <h2>更习惯微信？</h2>
-          <p class="lede">你也可以按同样的问题结构在微信里提交。建议用“结构化输入”，而不是先聊很久再进入判断。</p>
+          <p class="lede">你也可以按同样的问题结构在微信里提交。</p>
           <div class="statement" style="margin-top:16px;">
             <div class="title">微信</div>
             <div class="lines">
@@ -1086,9 +1050,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     MEMOS INDEX
-     ====================================================== -->
+<!-- MEMOS INDEX -->
 <div id="view-memos" class="view" data-route="memos">
   <section>
     <div class="container">
@@ -1192,9 +1154,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     MEMO 01
-     ====================================================== -->
+<!-- MEMO 01 -->
 <div id="view-memo-01" class="view" data-route="memo-01">
   <section>
     <div class="container">
@@ -1296,9 +1256,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     MEMO 02
-     ====================================================== -->
+<!-- MEMO 02 -->
 <div id="view-memo-02" class="view" data-route="memo-02">
   <section>
     <div class="container">
@@ -1383,9 +1341,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     MEMO 03
-     ====================================================== -->
+<!-- MEMO 03 -->
 <div id="view-memo-03" class="view" data-route="memo-03">
   <section>
     <div class="container">
@@ -1470,9 +1426,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     MEMO 04
-     ====================================================== -->
+<!-- MEMO 04 -->
 <div id="view-memo-04" class="view" data-route="memo-04">
   <section>
     <div class="container">
@@ -1498,7 +1452,7 @@ textarea{min-height: 110px; resize: vertical;}
         <div class="fade-in" style="margin-top:48px;">
           <h2>1. 背景</h2>
           <p class="lede">市场叙事持续强调“现在不做，将来会更难”，但当时并不存在明确的关闭节点。</p>
-          <p class="lede">家庭并不急需身份本身，压力主要来自不确定性被持续放大与周围人的集体行动。</p>
+          <p class="lede">压力主要来自不确定性被持续放大与周围人的集体行动。</p>
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
@@ -1517,7 +1471,6 @@ textarea{min-height: 110px; resize: vertical;}
           <h2>4. 结构拆解</h2>
           <p class="lede"><strong>选项保留</strong>：等待保留选项；提前下注会立刻降低可逆性与调整空间。</p>
           <p class="lede"><strong>激励不对称</strong>：推动者在行动中获益，而客户在反向结果中承担后果。</p>
-          <p class="lede"><strong>控制权/流动性</strong>：若提前锁定资金或路径，未来面对家庭变化时的应对空间会变小。</p>
           <p class="lede">核心问题不是“会不会错过”，而是“现在行动的不可逆成本是否被证实”。</p>
         </div>
 
@@ -1529,8 +1482,8 @@ textarea{min-height: 110px; resize: vertical;}
 
         <div class="fade-in" style="margin-top:48px;">
           <h2>6. 翻转条件</h2>
-          <p class="lede">若出现明确的政策时间窗或不可逆损失证据（关闭通知、名额机制等），等待的优势会下降。</p>
-          <p class="lede">若家庭的真实需求变为刚性（例如明确迁移/教育节点），可逆性权重下降，行动权重上升。</p>
+          <p class="lede">若出现明确的政策时间窗或不可逆损失证据，等待的优势会下降。</p>
+          <p class="lede">若家庭的真实需求变为刚性（例如明确迁移/教育节点），行动权重上升。</p>
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
@@ -1557,9 +1510,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     TERMS
-     ====================================================== -->
+<!-- TERMS -->
 <div id="view-terms" class="view" data-route="terms">
   <section>
     <div class="container">
@@ -1598,15 +1549,7 @@ textarea{min-height: 110px; resize: vertical;}
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
-          <h2>3. 合作的含义</h2>
-          <p class="lede">
-            与 GP Partners 的合作是一段结构化对话，而不是推进承诺。我们不保证进度、批复或结果。
-            有时最负责任的结论是：更清晰地理解为什么不该被催促，甚至不该做。
-          </p>
-        </div>
-
-        <div class="fade-in" style="margin-top:48px;">
-          <h2>4. 决策责任</h2>
+          <h2>3. 决策责任</h2>
           <p class="lede">
             最终决定始终属于你。我们的角色是澄清权衡，而不是消除不确定性。
             任何咨询都无法消灭风险，只能诚实地揭示它。
@@ -1614,18 +1557,10 @@ textarea{min-height: 110px; resize: vertical;}
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
-          <h2>5. 保密</h2>
+          <h2>4. 保密</h2>
           <p class="lede">
             所有讨论均按保密处理。我们不会把个人细节用于营销、宣传或“案例展示”。
-            公开的判断纪要均为匿名化与结构化表达，不呈现结果、不呈现个人信息。
-          </p>
-        </div>
-
-        <div class="fade-in" style="margin-top:48px;">
-          <h2>6. 双向适配</h2>
-          <p class="lede">
-            我们更适合重视清晰度而非安慰、重视理解而非推进的人。
-            如果你需要的是确认、加速或背书，GP Partners 可能不是合适的顾问。
+            公开判断纪要均为匿名化与结构化表达，不呈现结果、不呈现个人信息。
           </p>
         </div>
 
@@ -1644,9 +1579,7 @@ textarea{min-height: 110px; resize: vertical;}
   </section>
 </div>
 
-<!-- ======================================================
-     PRIVACY
-     ====================================================== -->
+<!-- PRIVACY -->
 <div id="view-privacy" class="view" data-route="privacy">
   <section>
     <div class="container">
@@ -1664,28 +1597,13 @@ textarea{min-height: 110px; resize: vertical;}
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
-          <h2>1. 我们会接触到的信息</h2>
-          <p class="lede">你自愿提供的信息可能包含个人、财务或辖区细节。我们只收集理解决定所必需的信息。</p>
-        </div>
-
-        <div class="fade-in" style="margin-top:48px;">
-          <h2>2. 信息如何被使用</h2>
+          <h2>信息如何被使用</h2>
           <p class="lede">所有信息仅用于本次判断与合作范围内的咨询目的。我们不出售、不出租、不共享，也不会把信息用于第三方用途。</p>
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
-          <h2>3. 判断纪要与公开内容</h2>
-          <p class="lede">我们公开的判断纪要均为匿名化与结构化表达，聚焦判断逻辑而非个人结果。除非你明确同意，我们不会公开任何可识别个人的信息。</p>
-        </div>
-
-        <div class="fade-in" style="margin-top:48px;">
-          <h2>4. 数据处理</h2>
-          <p class="lede">信息按“必要知情”原则存取。我们不建营销名单，也不会进行未经请求的外联。信息不会被无期限保留。</p>
-        </div>
-
-        <div class="fade-in" style="margin-top:48px;">
-          <h2>5. 保密是一条边界</h2>
-          <p class="lede">保密不以是否合作为前提。即使最终不进入合作，我们也会以同样的标准对待你的信息。</p>
+          <h2>判断纪要与公开内容</h2>
+          <p class="lede">公开判断纪要为匿名化与结构化表达，聚焦判断逻辑而非个人结果。除非你明确同意，我们不会公开任何可识别个人的信息。</p>
         </div>
 
         <div class="fade-in" style="margin-top:48px;">
@@ -1752,20 +1670,19 @@ textarea{min-height: 110px; resize: vertical;}
   function setActiveView(route){
     views.forEach(v => v.classList.toggle("active", v.dataset.route === route));
 
-    // nav active only for top-level sections
     navLinks.forEach(a => {
       const key = a.getAttribute("data-nav");
       a.classList.toggle("active", key === route);
     });
 
-    // close mobile panel
     if(mobilePanel && mobilePanel.classList.contains("open")){
       mobilePanel.classList.remove("open");
       mobileToggle && mobileToggle.setAttribute("aria-expanded","false");
     }
 
-    // scroll top
-    window.scrollTo({ top: 0, behavior: "instant" });
+    /* ✅ 修复点：不要使用 behavior:"instant"（会报错导致后续逻辑中断） */
+    window.scrollTo(0, 0);
+
     revealNow();
   }
 
@@ -1791,24 +1708,29 @@ textarea{min-height: 110px; resize: vertical;}
   /* =========================================================
      Fade-in reveal
      ========================================================= */
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add("visible");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  const io = ("IntersectionObserver" in window)
+    ? new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 })
+    : null;
 
   function revealNow(){
-    document.querySelectorAll(".view.active .fade-in").forEach(el=>{
-      if(!el.classList.contains("visible")) io.observe(el);
+    const els = document.querySelectorAll(".view.active .fade-in");
+    els.forEach(el=>{
+      if(el.classList.contains("visible")) return;
+      if(io) io.observe(el);
+      else el.classList.add("visible"); // 无 IntersectionObserver 时也直接显示
     });
   }
   revealNow();
 
   /* =========================================================
-     Memo filters (index page)
+     Memo filters
      ========================================================= */
   const filterState = { type: null, lens: null };
   const chips = Array.from(document.querySelectorAll(".chip"));
@@ -1822,13 +1744,12 @@ textarea{min-height: 110px; resize: vertical;}
       const lensArr = (card.getAttribute("data-lens") || "").split(",").map(s=>s.trim()).filter(Boolean);
       const typeOk = !type || t === type;
       const lensOk = !lens || lensArr.includes(lens);
-      const show = typeOk && lensOk;
-      card.style.display = show ? "" : "none";
+      card.style.display = (typeOk && lensOk) ? "" : "none";
     });
 
     const label = [
-      filterState.type ? `类型：${filterState.type}` : null,
-      filterState.lens ? `视角：${filterState.lens}` : null
+      type ? `类型：${type}` : null,
+      lens ? `视角：${lens}` : null
     ].filter(Boolean).join(" · ");
     if(activeFilters) activeFilters.textContent = label ? `当前展示：${label}` : "当前展示：全部";
   }
@@ -1837,12 +1758,9 @@ textarea{min-height: 110px; resize: vertical;}
     btn.addEventListener("click", ()=>{
       const group = btn.getAttribute("data-group");
       const value = btn.getAttribute("data-value");
-
       if(!group) return;
 
-      // toggle
       const isActive = btn.classList.contains("active");
-      // clear group
       chips.filter(x=>x.getAttribute("data-group")===group).forEach(x=>x.classList.remove("active"));
 
       if(isActive){
